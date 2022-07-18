@@ -29697,10 +29697,10 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /txlabs/blockless-chain/order/params:
+  /txlabs/blockless-chain/market/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: TxlabsBlocklesschainOrderParams
+      operationId: TxlabsBlocklesschainMarketParams
       responses:
         '200':
           description: A successful response.
@@ -50906,10 +50906,10 @@ definitions:
     title: >-
       SignatureCounts contains information about signature reporting for a
       number of blocks
-  txlabs.blocklesschain.order.Params:
+  txlabs.blocklesschain.market.Params:
     type: object
     description: Params defines the parameters for the module.
-  txlabs.blocklesschain.order.QueryParamsResponse:
+  txlabs.blocklesschain.market.QueryParamsResponse:
     type: object
     properties:
       params:

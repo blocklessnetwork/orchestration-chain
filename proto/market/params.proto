@@ -1,0 +1,12 @@
+syntax = "proto3";
+package txlabs.blocklesschain.market;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/txlabs/blockless-chain/x/market/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
