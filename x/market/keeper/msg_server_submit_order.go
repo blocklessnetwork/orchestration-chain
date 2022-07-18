@@ -51,5 +51,6 @@ func (k msgServer) SubmitOrder(goCtx context.Context, msg *types.MsgSubmitOrder)
 		return nil, sdkError
 	}
 
+	k.SetOrder(ctx, order)
 	return &types.MsgSubmitOrderResponse{}, nil
 }
