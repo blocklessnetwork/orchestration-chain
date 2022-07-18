@@ -1,10 +1,10 @@
 accounts:
-  - name: account1
+  - name: alice
     coins: ["200000000bls"]
-  - name: account2
+  - name: bob
     coins: ["100000000bls"]
 validator:
-  name: account1
+  name: alice
   staked: "100000000bls"
 client:
   openapi:
@@ -12,7 +12,7 @@ client:
   vuex:
     path: "vue/src/store"
 faucet:
-  name: account2
+  name: bob
   coins: ["100000bls"]
 genesis:
   chain_id: "bls-edgenet-1"
