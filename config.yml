@@ -1,16 +1,27 @@
 accounts:
-  - name: alice
-    coins: ["20000token", "200000000stake"]
-  - name: bob
-    coins: ["10000token", "100000000stake"]
+  - name: account1
+    coins: ["200000000bls"]
+  - name: account2
+    coins: ["100000000bls"]
 validator:
-  name: alice
-  staked: "100000000stake"
+  name: account1
+  staked: "100000000bls"
 client:
   openapi:
     path: "docs/static/openapi.yml"
   vuex:
     path: "vue/src/store"
 faucet:
-  name: bob
-  coins: ["5token", "100000stake"]
+  name: account2
+  coins: ["100000bls"]
+genesis:
+  chain_id: "bls-edgenet-1"
+  app_state:
+    staking:
+      params:
+        bond_denom: "bls"
+    mint:
+      params:
+        mint_denom: "bls"
+build:
+  binary: blsd

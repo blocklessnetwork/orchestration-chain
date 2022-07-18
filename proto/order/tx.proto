@@ -1,0 +1,13 @@
+syntax = "proto3";
+package txlabs.blocklesschain.order;
+
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "github.com/txlabs/blockless-chain/x/order/types";
+
+// Msg defines the Msg service.
+service Msg {
+    // this line is used by starport scaffolding # proto/tx/rpc
+}
+
+// this line is used by starport scaffolding # proto/tx/message
