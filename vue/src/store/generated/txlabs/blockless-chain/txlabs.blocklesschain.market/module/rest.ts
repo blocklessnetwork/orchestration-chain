@@ -9,6 +9,10 @@
  * ---------------------------------------------------------------
  */
 
+export type MarketMsgSubmitCompletedOrderResponse = object;
+
+export type MarketMsgSubmitOrderResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */

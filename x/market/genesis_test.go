@@ -3,17 +3,17 @@ package market_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/require"
 	keepertest "github.com/txlabs/blockless-chain/testutil/keeper"
 	"github.com/txlabs/blockless-chain/testutil/nullify"
 	"github.com/txlabs/blockless-chain/x/market"
 	"github.com/txlabs/blockless-chain/x/market/types"
-	"github.com/stretchr/testify/require"
 )
 
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
-		Params:	types.DefaultParams(),
-		
+		Params: types.DefaultParams(),
+
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -24,8 +24,6 @@ func TestGenesis(t *testing.T) {
 
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
-
-	
 
 	// this line is used by starport scaffolding # genesis/test/assert
 }

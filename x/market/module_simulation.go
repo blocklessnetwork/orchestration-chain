@@ -3,15 +3,15 @@ package market
 import (
 	"math/rand"
 
-	"github.com/txlabs/blockless-chain/testutil/sample"
-	marketsimulation "github.com/txlabs/blockless-chain/x/market/simulation"
-	"github.com/txlabs/blockless-chain/x/market/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
+	"github.com/txlabs/blockless-chain/testutil/sample"
+	marketsimulation "github.com/txlabs/blockless-chain/x/market/simulation"
+	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 // avoid unused import issue
@@ -24,7 +24,15 @@ var (
 )
 
 const (
-    // this line is used by starport scaffolding # simapp/module/const
+	opWeightMsgSubmitOrder = "op_weight_msg_submit_order"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgSubmitOrder int = 100
+
+	opWeightMsgSubmitCompletedOrder = "op_weight_msg_submit_completed_order"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgSubmitCompletedOrder int = 100
+
+	// this line is used by starport scaffolding # simapp/module/const
 )
 
 // GenerateGenesisState creates a randomized GenState of the module
@@ -34,7 +42,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		accs[i] = acc.Address.String()
 	}
 	marketGenesis := types.GenesisState{
-		Params:	types.DefaultParams(),
+		Params: types.DefaultParams(),
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&marketGenesis)
@@ -47,9 +55,8 @@ func (AppModule) ProposalContents(_ module.SimulationState) []simtypes.WeightedP
 
 // RandomizedParams creates randomized  param changes for the simulator
 func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.ParamChange {
-	
-	return []simtypes.ParamChange{
-	}
+
+	return []simtypes.ParamChange{}
 }
 
 // RegisterStoreDecoder registers a decoder
@@ -58,6 +65,28 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
+
+	var weightMsgSubmitOrder int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgSubmitOrder, &weightMsgSubmitOrder, nil,
+		func(_ *rand.Rand) {
+			weightMsgSubmitOrder = defaultWeightMsgSubmitOrder
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgSubmitOrder,
+		marketsimulation.SimulateMsgSubmitOrder(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgSubmitCompletedOrder int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgSubmitCompletedOrder, &weightMsgSubmitCompletedOrder, nil,
+		func(_ *rand.Rand) {
+			weightMsgSubmitCompletedOrder = defaultWeightMsgSubmitCompletedOrder
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgSubmitCompletedOrder,
+		marketsimulation.SimulateMsgSubmitCompletedOrder(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
 

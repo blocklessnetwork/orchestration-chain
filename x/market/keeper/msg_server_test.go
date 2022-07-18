@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-    "github.com/txlabs/blockless-chain/x/market/types"
-    "github.com/txlabs/blockless-chain/x/market/keeper"
-    keepertest "github.com/txlabs/blockless-chain/testutil/keeper"
+	keepertest "github.com/txlabs/blockless-chain/testutil/keeper"
+	"github.com/txlabs/blockless-chain/x/market/keeper"
+	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {

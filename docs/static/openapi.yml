@@ -50906,6 +50906,10 @@ definitions:
     title: >-
       SignatureCounts contains information about signature reporting for a
       number of blocks
+  txlabs.blocklesschain.market.MsgSubmitCompletedOrderResponse:
+    type: object
+  txlabs.blocklesschain.market.MsgSubmitOrderResponse:
+    type: object
   txlabs.blocklesschain.market.Params:
     type: object
     description: Params defines the parameters for the module.

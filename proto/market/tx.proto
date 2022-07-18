@@ -7,7 +7,26 @@ option go_package = "github.com/txlabs/blockless-chain/x/market/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+      rpc SubmitOrder(MsgSubmitOrder) returns (MsgSubmitOrderResponse);
+  rpc SubmitCompletedOrder(MsgSubmitCompletedOrder) returns (MsgSubmitCompletedOrderResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgSubmitOrder {
+  string creator = 1;
+  string functionId = 2;
+  string fuel = 3;
+}
+
+message MsgSubmitOrderResponse {
+}
+
+message MsgSubmitCompletedOrder {
+  string creator = 1;
+  string orderIndex = 2;
+}
+
+message MsgSubmitCompletedOrderResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message
