@@ -37,5 +37,3 @@ genesis:
         mint_denom: "ubls"
 build:
   binary: blsd
-init:
-  home: "~/.blsd"

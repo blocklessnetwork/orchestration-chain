@@ -24,15 +24,17 @@ func (k msgServer) SubmitOrder(goCtx context.Context, msg *types.MsgSubmitOrder)
 		Date:       currentTime.String(),
 	}
 
-	// try getting a scavenge from the store using the solution hash as the key
+	// try getting a order from the store using the solution hash as the key
 	_, isFound := k.GetOrder(ctx, order.Index)
-	// return an error if a scavenge already exists in the store
+
+	// return an error if a order already exists in the store
 	if isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Order with that id already exists")
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "order with that id already exists")
 	}
 
-	// get address of the Scavenge module account
+	// get address of the order module account
 	moduleAcct := sdk.AccAddress(crypto.AddressHash([]byte(types.ModuleName)))
+
 	// convert the message creator address from a string into sdk.AccAddress
 	customer, err := sdk.AccAddressFromBech32(msg.Creator)
 
