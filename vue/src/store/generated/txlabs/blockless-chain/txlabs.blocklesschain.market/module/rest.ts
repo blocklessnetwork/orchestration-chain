@@ -34,6 +34,7 @@ export interface MarketOrder {
 
 export interface MarketOrderFilter {
   customer?: string;
+  state?: string;
 }
 
 /**
@@ -410,6 +411,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryOrderAll = (
     query?: {
       "filter.customer"?: string;
+      "filter.state"?: string;
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;

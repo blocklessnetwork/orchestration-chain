@@ -15,6 +15,7 @@ export interface Order {
 
 export interface OrderFilter {
   customer: string;
+  state: string;
 }
 
 const baseOrder: object = {
@@ -182,12 +183,15 @@ export const Order = {
   },
 };
 
-const baseOrderFilter: object = { customer: "" };
+const baseOrderFilter: object = { customer: "", state: "" };
 
 export const OrderFilter = {
   encode(message: OrderFilter, writer: Writer = Writer.create()): Writer {
     if (message.customer !== "") {
       writer.uint32(10).string(message.customer);
+    }
+    if (message.state !== "") {
+      writer.uint32(18).string(message.state);
     }
     return writer;
   },
@@ -201,6 +205,9 @@ export const OrderFilter = {
       switch (tag >>> 3) {
         case 1:
           message.customer = reader.string();
+          break;
+        case 2:
+          message.state = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -217,12 +224,18 @@ export const OrderFilter = {
     } else {
       message.customer = "";
     }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = String(object.state);
+    } else {
+      message.state = "";
+    }
     return message;
   },
 
   toJSON(message: OrderFilter): unknown {
     const obj: any = {};
     message.customer !== undefined && (obj.customer = message.customer);
+    message.state !== undefined && (obj.state = message.state);
     return obj;
   },
 
@@ -232,6 +245,11 @@ export const OrderFilter = {
       message.customer = object.customer;
     } else {
       message.customer = "";
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    } else {
+      message.state = "";
     }
     return message;
   },

@@ -15,4 +15,5 @@ message Order {
 
 message OrderFilter {
   string customer = 1;
+  string state = 2;
 }

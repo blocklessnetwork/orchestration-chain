@@ -29965,6 +29965,10 @@ paths:
           in: query
           required: false
           type: string
+        - name: filter.state
+          in: query
+          required: false
+          type: string
         - name: pagination.key
           description: |-
             key is a value returned in PageResponse.next_key to begin
@@ -51324,6 +51328,8 @@ definitions:
     type: object
     properties:
       customer:
+        type: string
+      state:
         type: string
   txlabs.blocklesschain.market.Params:
     type: object
