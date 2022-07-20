@@ -9,7 +9,9 @@ export interface MsgSubmitOrder {
   fuel: string;
 }
 
-export interface MsgSubmitOrderResponse {}
+export interface MsgSubmitOrderResponse {
+  orderIndex: string;
+}
 
 export interface MsgSubmitCompletedOrder {
   creator: string;
@@ -18,6 +20,13 @@ export interface MsgSubmitCompletedOrder {
 }
 
 export interface MsgSubmitCompletedOrderResponse {}
+
+export interface MsgClaimOrderWork {
+  creator: string;
+  orderIndex: string;
+}
+
+export interface MsgClaimOrderWorkResponse {}
 
 const baseMsgSubmitOrder: object = { creator: "", functionId: "", fuel: "" };
 
@@ -108,10 +117,16 @@ export const MsgSubmitOrder = {
   },
 };
 
-const baseMsgSubmitOrderResponse: object = {};
+const baseMsgSubmitOrderResponse: object = { orderIndex: "" };
 
 export const MsgSubmitOrderResponse = {
-  encode(_: MsgSubmitOrderResponse, writer: Writer = Writer.create()): Writer {
+  encode(
+    message: MsgSubmitOrderResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.orderIndex !== "") {
+      writer.uint32(10).string(message.orderIndex);
+    }
     return writer;
   },
 
@@ -122,6 +137,9 @@ export const MsgSubmitOrderResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.orderIndex = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -130,18 +148,31 @@ export const MsgSubmitOrderResponse = {
     return message;
   },
 
-  fromJSON(_: any): MsgSubmitOrderResponse {
+  fromJSON(object: any): MsgSubmitOrderResponse {
     const message = { ...baseMsgSubmitOrderResponse } as MsgSubmitOrderResponse;
+    if (object.orderIndex !== undefined && object.orderIndex !== null) {
+      message.orderIndex = String(object.orderIndex);
+    } else {
+      message.orderIndex = "";
+    }
     return message;
   },
 
-  toJSON(_: MsgSubmitOrderResponse): unknown {
+  toJSON(message: MsgSubmitOrderResponse): unknown {
     const obj: any = {};
+    message.orderIndex !== undefined && (obj.orderIndex = message.orderIndex);
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgSubmitOrderResponse>): MsgSubmitOrderResponse {
+  fromPartial(
+    object: DeepPartial<MsgSubmitOrderResponse>
+  ): MsgSubmitOrderResponse {
     const message = { ...baseMsgSubmitOrderResponse } as MsgSubmitOrderResponse;
+    if (object.orderIndex !== undefined && object.orderIndex !== null) {
+      message.orderIndex = object.orderIndex;
+    } else {
+      message.orderIndex = "";
+    }
     return message;
   },
 };
@@ -302,13 +333,140 @@ export const MsgSubmitCompletedOrderResponse = {
   },
 };
 
+const baseMsgClaimOrderWork: object = { creator: "", orderIndex: "" };
+
+export const MsgClaimOrderWork = {
+  encode(message: MsgClaimOrderWork, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.orderIndex !== "") {
+      writer.uint32(18).string(message.orderIndex);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgClaimOrderWork {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgClaimOrderWork } as MsgClaimOrderWork;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.orderIndex = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgClaimOrderWork {
+    const message = { ...baseMsgClaimOrderWork } as MsgClaimOrderWork;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.orderIndex !== undefined && object.orderIndex !== null) {
+      message.orderIndex = String(object.orderIndex);
+    } else {
+      message.orderIndex = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgClaimOrderWork): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.orderIndex !== undefined && (obj.orderIndex = message.orderIndex);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgClaimOrderWork>): MsgClaimOrderWork {
+    const message = { ...baseMsgClaimOrderWork } as MsgClaimOrderWork;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.orderIndex !== undefined && object.orderIndex !== null) {
+      message.orderIndex = object.orderIndex;
+    } else {
+      message.orderIndex = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgClaimOrderWorkResponse: object = {};
+
+export const MsgClaimOrderWorkResponse = {
+  encode(
+    _: MsgClaimOrderWorkResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgClaimOrderWorkResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgClaimOrderWorkResponse,
+    } as MsgClaimOrderWorkResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgClaimOrderWorkResponse {
+    const message = {
+      ...baseMsgClaimOrderWorkResponse,
+    } as MsgClaimOrderWorkResponse;
+    return message;
+  },
+
+  toJSON(_: MsgClaimOrderWorkResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgClaimOrderWorkResponse>
+  ): MsgClaimOrderWorkResponse {
+    const message = {
+      ...baseMsgClaimOrderWorkResponse,
+    } as MsgClaimOrderWorkResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   SubmitOrder(request: MsgSubmitOrder): Promise<MsgSubmitOrderResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   SubmitCompletedOrder(
     request: MsgSubmitCompletedOrder
   ): Promise<MsgSubmitCompletedOrderResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  ClaimOrderWork(
+    request: MsgClaimOrderWork
+  ): Promise<MsgClaimOrderWorkResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -339,6 +497,20 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgSubmitCompletedOrderResponse.decode(new Reader(data))
+    );
+  }
+
+  ClaimOrderWork(
+    request: MsgClaimOrderWork
+  ): Promise<MsgClaimOrderWorkResponse> {
+    const data = MsgClaimOrderWork.encode(request).finish();
+    const promise = this.rpc.request(
+      "txlabs.blocklesschain.market.Msg",
+      "ClaimOrderWork",
+      data
+    );
+    return promise.then((data) =>
+      MsgClaimOrderWorkResponse.decode(new Reader(data))
     );
   }
 }

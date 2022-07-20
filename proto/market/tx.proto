@@ -9,6 +9,7 @@ option go_package = "github.com/txlabs/blockless-chain/x/market/types";
 service Msg {
       rpc SubmitOrder(MsgSubmitOrder) returns (MsgSubmitOrderResponse);
   rpc SubmitCompletedOrder(MsgSubmitCompletedOrder) returns (MsgSubmitCompletedOrderResponse);
+  rpc ClaimOrderWork(MsgClaimOrderWork) returns (MsgClaimOrderWorkResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -19,6 +20,7 @@ message MsgSubmitOrder {
 }
 
 message MsgSubmitOrderResponse {
+  string orderIndex = 1;
 }
 
 message MsgSubmitCompletedOrder {
@@ -28,6 +30,14 @@ message MsgSubmitCompletedOrder {
 }
 
 message MsgSubmitCompletedOrderResponse {
+}
+
+message MsgClaimOrderWork {
+  string creator = 1;
+  string orderIndex = 2;
+}
+
+message MsgClaimOrderWorkResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

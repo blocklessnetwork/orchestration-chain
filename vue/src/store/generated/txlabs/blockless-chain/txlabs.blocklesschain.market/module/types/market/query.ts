@@ -7,6 +7,7 @@ import {
   PageResponse,
 } from "../cosmos/base/query/v1beta1/pagination";
 import { CompletedOrder } from "../market/completed_order";
+import { ClaimedOrder } from "../market/claimed_order";
 
 export const protobufPackage = "txlabs.blocklesschain.market";
 
@@ -51,6 +52,23 @@ export interface QueryAllCompletedOrderRequest {
 
 export interface QueryAllCompletedOrderResponse {
   completedOrder: CompletedOrder[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetClaimedOrderRequest {
+  index: string;
+}
+
+export interface QueryGetClaimedOrderResponse {
+  claimedOrder: ClaimedOrder | undefined;
+}
+
+export interface QueryAllClaimedOrderRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllClaimedOrderResponse {
+  claimedOrder: ClaimedOrder[];
   pagination: PageResponse | undefined;
 }
 
@@ -765,6 +783,325 @@ export const QueryAllCompletedOrderResponse = {
   },
 };
 
+const baseQueryGetClaimedOrderRequest: object = { index: "" };
+
+export const QueryGetClaimedOrderRequest = {
+  encode(
+    message: QueryGetClaimedOrderRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetClaimedOrderRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetClaimedOrderRequest,
+    } as QueryGetClaimedOrderRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetClaimedOrderRequest {
+    const message = {
+      ...baseQueryGetClaimedOrderRequest,
+    } as QueryGetClaimedOrderRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetClaimedOrderRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetClaimedOrderRequest>
+  ): QueryGetClaimedOrderRequest {
+    const message = {
+      ...baseQueryGetClaimedOrderRequest,
+    } as QueryGetClaimedOrderRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetClaimedOrderResponse: object = {};
+
+export const QueryGetClaimedOrderResponse = {
+  encode(
+    message: QueryGetClaimedOrderResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.claimedOrder !== undefined) {
+      ClaimedOrder.encode(
+        message.claimedOrder,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetClaimedOrderResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetClaimedOrderResponse,
+    } as QueryGetClaimedOrderResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.claimedOrder = ClaimedOrder.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetClaimedOrderResponse {
+    const message = {
+      ...baseQueryGetClaimedOrderResponse,
+    } as QueryGetClaimedOrderResponse;
+    if (object.claimedOrder !== undefined && object.claimedOrder !== null) {
+      message.claimedOrder = ClaimedOrder.fromJSON(object.claimedOrder);
+    } else {
+      message.claimedOrder = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetClaimedOrderResponse): unknown {
+    const obj: any = {};
+    message.claimedOrder !== undefined &&
+      (obj.claimedOrder = message.claimedOrder
+        ? ClaimedOrder.toJSON(message.claimedOrder)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetClaimedOrderResponse>
+  ): QueryGetClaimedOrderResponse {
+    const message = {
+      ...baseQueryGetClaimedOrderResponse,
+    } as QueryGetClaimedOrderResponse;
+    if (object.claimedOrder !== undefined && object.claimedOrder !== null) {
+      message.claimedOrder = ClaimedOrder.fromPartial(object.claimedOrder);
+    } else {
+      message.claimedOrder = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllClaimedOrderRequest: object = {};
+
+export const QueryAllClaimedOrderRequest = {
+  encode(
+    message: QueryAllClaimedOrderRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllClaimedOrderRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllClaimedOrderRequest,
+    } as QueryAllClaimedOrderRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllClaimedOrderRequest {
+    const message = {
+      ...baseQueryAllClaimedOrderRequest,
+    } as QueryAllClaimedOrderRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllClaimedOrderRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllClaimedOrderRequest>
+  ): QueryAllClaimedOrderRequest {
+    const message = {
+      ...baseQueryAllClaimedOrderRequest,
+    } as QueryAllClaimedOrderRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllClaimedOrderResponse: object = {};
+
+export const QueryAllClaimedOrderResponse = {
+  encode(
+    message: QueryAllClaimedOrderResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.claimedOrder) {
+      ClaimedOrder.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllClaimedOrderResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllClaimedOrderResponse,
+    } as QueryAllClaimedOrderResponse;
+    message.claimedOrder = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.claimedOrder.push(
+            ClaimedOrder.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllClaimedOrderResponse {
+    const message = {
+      ...baseQueryAllClaimedOrderResponse,
+    } as QueryAllClaimedOrderResponse;
+    message.claimedOrder = [];
+    if (object.claimedOrder !== undefined && object.claimedOrder !== null) {
+      for (const e of object.claimedOrder) {
+        message.claimedOrder.push(ClaimedOrder.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllClaimedOrderResponse): unknown {
+    const obj: any = {};
+    if (message.claimedOrder) {
+      obj.claimedOrder = message.claimedOrder.map((e) =>
+        e ? ClaimedOrder.toJSON(e) : undefined
+      );
+    } else {
+      obj.claimedOrder = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllClaimedOrderResponse>
+  ): QueryAllClaimedOrderResponse {
+    const message = {
+      ...baseQueryAllClaimedOrderResponse,
+    } as QueryAllClaimedOrderResponse;
+    message.claimedOrder = [];
+    if (object.claimedOrder !== undefined && object.claimedOrder !== null) {
+      for (const e of object.claimedOrder) {
+        message.claimedOrder.push(ClaimedOrder.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -781,6 +1118,14 @@ export interface Query {
   CompletedOrderAll(
     request: QueryAllCompletedOrderRequest
   ): Promise<QueryAllCompletedOrderResponse>;
+  /** Queries a ClaimedOrder by index. */
+  ClaimedOrder(
+    request: QueryGetClaimedOrderRequest
+  ): Promise<QueryGetClaimedOrderResponse>;
+  /** Queries a list of ClaimedOrder items. */
+  ClaimedOrderAll(
+    request: QueryAllClaimedOrderRequest
+  ): Promise<QueryAllClaimedOrderResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -847,6 +1192,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllCompletedOrderResponse.decode(new Reader(data))
+    );
+  }
+
+  ClaimedOrder(
+    request: QueryGetClaimedOrderRequest
+  ): Promise<QueryGetClaimedOrderResponse> {
+    const data = QueryGetClaimedOrderRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "txlabs.blocklesschain.market.Query",
+      "ClaimedOrder",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetClaimedOrderResponse.decode(new Reader(data))
+    );
+  }
+
+  ClaimedOrderAll(
+    request: QueryAllClaimedOrderRequest
+  ): Promise<QueryAllClaimedOrderResponse> {
+    const data = QueryAllClaimedOrderRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "txlabs.blocklesschain.market.Query",
+      "ClaimedOrderAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllClaimedOrderResponse.decode(new Reader(data))
     );
   }
 }

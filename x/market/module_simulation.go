@@ -32,6 +32,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgSubmitCompletedOrder int = 100
 
+	opWeightMsgClaimOrderWork = "op_weight_msg_claim_order_work"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgClaimOrderWork int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -86,6 +90,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgSubmitCompletedOrder,
 		marketsimulation.SimulateMsgSubmitCompletedOrder(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgClaimOrderWork int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgClaimOrderWork, &weightMsgClaimOrderWork, nil,
+		func(_ *rand.Rand) {
+			weightMsgClaimOrderWork = defaultWeightMsgClaimOrderWork
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgClaimOrderWork,
+		marketsimulation.SimulateMsgClaimOrderWork(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

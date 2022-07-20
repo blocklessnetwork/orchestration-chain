@@ -40,6 +40,19 @@ func (k msgServer) SubmitCompletedOrder(goCtx context.Context, msg *types.MsgSub
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "no order with that orderIndex found")
 	}
 
+	if order.State != "claimed" {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "order is not in claimed state")
+	}
+
+	claimedOrder, isFound := k.GetClaimedOrder(ctx, order.Index)
+	if !isFound {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "claimed order is not found")
+	}
+
+	if claimedOrder.ClaimedBy != msg.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "claimed order is not claimed by the completed order creator")
+	}
+
 	// get address of the order module account
 	moduleAcct := sdk.AccAddress(crypto.AddressHash([]byte(types.ModuleName)))
 

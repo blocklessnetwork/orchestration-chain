@@ -1,12 +1,13 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
+import { ClaimedOrder } from "./module/types/market/claimed_order"
 import { CompletedOrder } from "./module/types/market/completed_order"
 import { Order } from "./module/types/market/order"
 import { OrderFilter } from "./module/types/market/order"
 import { Params } from "./module/types/market/params"
 
 
-export { CompletedOrder, Order, OrderFilter, Params };
+export { ClaimedOrder, CompletedOrder, Order, OrderFilter, Params };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -49,8 +50,11 @@ const getDefaultState = () => {
 				OrderAll: {},
 				CompletedOrder: {},
 				CompletedOrderAll: {},
+				ClaimedOrder: {},
+				ClaimedOrderAll: {},
 				
 				_Structure: {
+						ClaimedOrder: getStructure(ClaimedOrder.fromPartial({})),
 						CompletedOrder: getStructure(CompletedOrder.fromPartial({})),
 						Order: getStructure(Order.fromPartial({})),
 						OrderFilter: getStructure(OrderFilter.fromPartial({})),
@@ -112,6 +116,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.CompletedOrderAll[JSON.stringify(params)] ?? {}
+		},
+				getClaimedOrder: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ClaimedOrder[JSON.stringify(params)] ?? {}
+		},
+				getClaimedOrderAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ClaimedOrderAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -265,6 +281,54 @@ export default {
 		},
 		
 		
+		
+		
+		 		
+		
+		
+		async QueryClaimedOrder({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryClaimedOrder( key.index)).data
+				
+					
+				commit('QUERY', { query: 'ClaimedOrder', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryClaimedOrder', payload: { options: { all }, params: {...key},query }})
+				return getters['getClaimedOrder']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryClaimedOrder API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryClaimedOrderAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryClaimedOrderAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryClaimedOrderAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'ClaimedOrderAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryClaimedOrderAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getClaimedOrderAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryClaimedOrderAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
 		async sendMsgSubmitCompletedOrder({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -295,6 +359,21 @@ export default {
 				}
 			}
 		},
+		async sendMsgClaimOrderWork({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgClaimOrderWork(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgClaimOrderWork:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgClaimOrderWork:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
 		
 		async MsgSubmitCompletedOrder({ rootGetters }, { value }) {
 			try {
@@ -319,6 +398,19 @@ export default {
 					throw new Error('TxClient:MsgSubmitOrder:Init Could not initialize signing client. Wallet is required.')
 				} else{
 					throw new Error('TxClient:MsgSubmitOrder:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgClaimOrderWork({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgClaimOrderWork(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgClaimOrderWork:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgClaimOrderWork:Create Could not create message: ' + e.message)
 				}
 			}
 		},

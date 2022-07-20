@@ -12,30 +12,26 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdSubmitOrder() *cobra.Command {
+func CmdClaimOrderWork() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "submit-order [function-id] [fuel]",
-		Short: "Broadcast message submit-order",
-		Args:  cobra.ExactArgs(2),
+		Use:   "claim-order-work [order-index]",
+		Short: "Broadcast message claim-order-work",
+		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			argFunctionId := args[0]
-			argFuel := args[1]
+			argOrderIndex := args[0]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgSubmitOrder(
+			msg := types.NewMsgClaimOrderWork(
 				clientCtx.GetFromAddress().String(),
-				argFunctionId,
-				argFuel,
+				argOrderIndex,
 			)
-
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
-
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

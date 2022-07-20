@@ -30,6 +30,14 @@ func TestGenesis(t *testing.T) {
 				Index: "1",
 			},
 		},
+		ClaimedOrderList: []types.ClaimedOrder{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -43,5 +51,6 @@ func TestGenesis(t *testing.T) {
 
 	require.ElementsMatch(t, genesisState.OrderList, got.OrderList)
 	require.ElementsMatch(t, genesisState.CompletedOrderList, got.CompletedOrderList)
+	require.ElementsMatch(t, genesisState.ClaimedOrderList, got.ClaimedOrderList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

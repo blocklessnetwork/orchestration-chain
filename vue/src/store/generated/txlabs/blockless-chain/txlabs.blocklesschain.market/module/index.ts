@@ -6,11 +6,13 @@ import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "
 import { Api } from "./rest";
 import { MsgSubmitCompletedOrder } from "./types/market/tx";
 import { MsgSubmitOrder } from "./types/market/tx";
+import { MsgClaimOrderWork } from "./types/market/tx";
 
 
 const types = [
   ["/txlabs.blocklesschain.market.MsgSubmitCompletedOrder", MsgSubmitCompletedOrder],
   ["/txlabs.blocklesschain.market.MsgSubmitOrder", MsgSubmitOrder],
+  ["/txlabs.blocklesschain.market.MsgClaimOrderWork", MsgClaimOrderWork],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -45,6 +47,7 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
     msgSubmitCompletedOrder: (data: MsgSubmitCompletedOrder): EncodeObject => ({ typeUrl: "/txlabs.blocklesschain.market.MsgSubmitCompletedOrder", value: MsgSubmitCompletedOrder.fromPartial( data ) }),
     msgSubmitOrder: (data: MsgSubmitOrder): EncodeObject => ({ typeUrl: "/txlabs.blocklesschain.market.MsgSubmitOrder", value: MsgSubmitOrder.fromPartial( data ) }),
+    msgClaimOrderWork: (data: MsgClaimOrderWork): EncodeObject => ({ typeUrl: "/txlabs.blocklesschain.market.MsgClaimOrderWork", value: MsgClaimOrderWork.fromPartial( data ) }),
     
   };
 };

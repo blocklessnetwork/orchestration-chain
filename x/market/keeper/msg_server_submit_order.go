@@ -56,5 +56,7 @@ func (k msgServer) SubmitOrder(goCtx context.Context, msg *types.MsgSubmitOrder)
 	}
 
 	k.SetOrder(ctx, order)
-	return &types.MsgSubmitOrderResponse{}, nil
+	return &types.MsgSubmitOrderResponse{
+		OrderIndex: order.Index,
+	}, nil
 }

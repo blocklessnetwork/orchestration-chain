@@ -9,6 +9,14 @@
  * ---------------------------------------------------------------
  */
 
+export interface MarketClaimedOrder {
+  index?: string;
+  orderIndex?: string;
+  claimedBy?: string;
+  claimedHeight?: string;
+  date?: string;
+}
+
 export interface MarketCompletedOrder {
   index?: string;
   orderIndex?: string;
@@ -18,9 +26,13 @@ export interface MarketCompletedOrder {
   fuelUsed?: string;
 }
 
+export type MarketMsgClaimOrderWorkResponse = object;
+
 export type MarketMsgSubmitCompletedOrderResponse = object;
 
-export type MarketMsgSubmitOrderResponse = object;
+export interface MarketMsgSubmitOrderResponse {
+  orderIndex?: string;
+}
 
 export interface MarketOrder {
   index?: string;
@@ -41,6 +53,21 @@ export interface MarketOrderFilter {
  * Params defines the parameters for the module.
  */
 export type MarketParams = object;
+
+export interface MarketQueryAllClaimedOrderResponse {
+  claimedOrder?: MarketClaimedOrder[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
 
 export interface MarketQueryAllCompletedOrderResponse {
   completedOrder?: MarketCompletedOrder[];
@@ -70,6 +97,10 @@ export interface MarketQueryAllOrderResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
+}
+
+export interface MarketQueryGetClaimedOrderResponse {
+  claimedOrder?: MarketClaimedOrder;
 }
 
 export interface MarketQueryGetCompletedOrderResponse {
@@ -354,10 +385,52 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title market/completed_order.proto
+ * @title market/claimed_order.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryClaimedOrderAll
+   * @summary Queries a list of ClaimedOrder items.
+   * @request GET:/txlabs/blockless-chain/market/claimed_order
+   */
+  queryClaimedOrderAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<MarketQueryAllClaimedOrderResponse, RpcStatus>({
+      path: `/txlabs/blockless-chain/market/claimed_order`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryClaimedOrder
+   * @summary Queries a ClaimedOrder by index.
+   * @request GET:/txlabs/blockless-chain/market/claimed_order/{index}
+   */
+  queryClaimedOrder = (index: string, params: RequestParams = {}) =>
+    this.request<MarketQueryGetClaimedOrderResponse, RpcStatus>({
+      path: `/txlabs/blockless-chain/market/claimed_order/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *
