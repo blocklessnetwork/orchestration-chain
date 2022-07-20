@@ -1,0 +1,15 @@
+syntax = "proto3";
+package txlabs.blocklesschain.market;
+
+option go_package = "github.com/txlabs/blockless-chain/x/market/types";
+
+message CompletedOrder {
+  string index = 1; 
+  string orderIndex = 2; 
+  string completedBy = 3; 
+  string height = 4; 
+  string date = 5; 
+  string fuelUsed = 6; 
+  
+}
+

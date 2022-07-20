@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "market/params.proto";
 import "market/order.proto";
+import "market/completed_order.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/txlabs/blockless-chain/x/market/types";
@@ -24,6 +25,16 @@ service Query {
 	// Queries a list of Order items.
 	rpc OrderAll(QueryAllOrderRequest) returns (QueryAllOrderResponse) {
 		option (google.api.http).get = "/txlabs/blockless-chain/market/order";
+	}
+
+// Queries a CompletedOrder by index.
+	rpc CompletedOrder(QueryGetCompletedOrderRequest) returns (QueryGetCompletedOrderResponse) {
+		option (google.api.http).get = "/txlabs/blockless-chain/market/completed_order/{index}";
+	}
+
+	// Queries a list of CompletedOrder items.
+	rpc CompletedOrderAll(QueryAllCompletedOrderRequest) returns (QueryAllCompletedOrderResponse) {
+		option (google.api.http).get = "/txlabs/blockless-chain/market/completed_order";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -48,11 +59,30 @@ message QueryGetOrderResponse {
 }
 
 message QueryAllOrderRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+	OrderFilter filter = 1;
+	cosmos.base.query.v1beta1.PageRequest pagination = 2;
 }
 
 message QueryAllOrderResponse {
 	repeated Order order = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetCompletedOrderRequest {
+	  string index = 1;
+
+}
+
+message QueryGetCompletedOrderResponse {
+	CompletedOrder completedOrder = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllCompletedOrderRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllCompletedOrderResponse {
+	repeated CompletedOrder completedOrder = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

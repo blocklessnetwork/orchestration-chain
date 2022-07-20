@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Params } from "../market/params";
 import { Order } from "../market/order";
+import { CompletedOrder } from "../market/completed_order";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "txlabs.blocklesschain.market";
@@ -8,8 +9,9 @@ export const protobufPackage = "txlabs.blocklesschain.market";
 /** GenesisState defines the market module's genesis state. */
 export interface GenesisState {
   params: Params | undefined;
-  /** this line is used by starport scaffolding # genesis/proto/state */
   orderList: Order[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  completedOrderList: CompletedOrder[];
 }
 
 const baseGenesisState: object = {};
@@ -22,6 +24,9 @@ export const GenesisState = {
     for (const v of message.orderList) {
       Order.encode(v!, writer.uint32(18).fork()).ldelim();
     }
+    for (const v of message.completedOrderList) {
+      CompletedOrder.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -30,6 +35,7 @@ export const GenesisState = {
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseGenesisState } as GenesisState;
     message.orderList = [];
+    message.completedOrderList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -38,6 +44,11 @@ export const GenesisState = {
           break;
         case 2:
           message.orderList.push(Order.decode(reader, reader.uint32()));
+          break;
+        case 3:
+          message.completedOrderList.push(
+            CompletedOrder.decode(reader, reader.uint32())
+          );
           break;
         default:
           reader.skipType(tag & 7);
@@ -50,6 +61,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.orderList = [];
+    message.completedOrderList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -58,6 +70,14 @@ export const GenesisState = {
     if (object.orderList !== undefined && object.orderList !== null) {
       for (const e of object.orderList) {
         message.orderList.push(Order.fromJSON(e));
+      }
+    }
+    if (
+      object.completedOrderList !== undefined &&
+      object.completedOrderList !== null
+    ) {
+      for (const e of object.completedOrderList) {
+        message.completedOrderList.push(CompletedOrder.fromJSON(e));
       }
     }
     return message;
@@ -74,12 +94,20 @@ export const GenesisState = {
     } else {
       obj.orderList = [];
     }
+    if (message.completedOrderList) {
+      obj.completedOrderList = message.completedOrderList.map((e) =>
+        e ? CompletedOrder.toJSON(e) : undefined
+      );
+    } else {
+      obj.completedOrderList = [];
+    }
     return obj;
   },
 
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.orderList = [];
+    message.completedOrderList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -88,6 +116,14 @@ export const GenesisState = {
     if (object.orderList !== undefined && object.orderList !== null) {
       for (const e of object.orderList) {
         message.orderList.push(Order.fromPartial(e));
+      }
+    }
+    if (
+      object.completedOrderList !== undefined &&
+      object.completedOrderList !== null
+    ) {
+      for (const e of object.completedOrderList) {
+        message.completedOrderList.push(CompletedOrder.fromPartial(e));
       }
     }
     return message;

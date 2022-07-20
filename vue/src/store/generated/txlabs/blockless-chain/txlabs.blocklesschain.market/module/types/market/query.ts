@@ -1,11 +1,12 @@
 /* eslint-disable */
 import { Reader, Writer } from "protobufjs/minimal";
 import { Params } from "../market/params";
-import { Order } from "../market/order";
+import { Order, OrderFilter } from "../market/order";
 import {
   PageRequest,
   PageResponse,
 } from "../cosmos/base/query/v1beta1/pagination";
+import { CompletedOrder } from "../market/completed_order";
 
 export const protobufPackage = "txlabs.blocklesschain.market";
 
@@ -27,11 +28,29 @@ export interface QueryGetOrderResponse {
 }
 
 export interface QueryAllOrderRequest {
+  filter: OrderFilter | undefined;
   pagination: PageRequest | undefined;
 }
 
 export interface QueryAllOrderResponse {
   order: Order[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetCompletedOrderRequest {
+  index: string;
+}
+
+export interface QueryGetCompletedOrderResponse {
+  completedOrder: CompletedOrder | undefined;
+}
+
+export interface QueryAllCompletedOrderRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllCompletedOrderResponse {
+  completedOrder: CompletedOrder[];
   pagination: PageResponse | undefined;
 }
 
@@ -258,8 +277,11 @@ export const QueryAllOrderRequest = {
     message: QueryAllOrderRequest,
     writer: Writer = Writer.create()
   ): Writer {
+    if (message.filter !== undefined) {
+      OrderFilter.encode(message.filter, writer.uint32(10).fork()).ldelim();
+    }
     if (message.pagination !== undefined) {
-      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -272,6 +294,9 @@ export const QueryAllOrderRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          message.filter = OrderFilter.decode(reader, reader.uint32());
+          break;
+        case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
@@ -284,6 +309,11 @@ export const QueryAllOrderRequest = {
 
   fromJSON(object: any): QueryAllOrderRequest {
     const message = { ...baseQueryAllOrderRequest } as QueryAllOrderRequest;
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = OrderFilter.fromJSON(object.filter);
+    } else {
+      message.filter = undefined;
+    }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromJSON(object.pagination);
     } else {
@@ -294,6 +324,10 @@ export const QueryAllOrderRequest = {
 
   toJSON(message: QueryAllOrderRequest): unknown {
     const obj: any = {};
+    message.filter !== undefined &&
+      (obj.filter = message.filter
+        ? OrderFilter.toJSON(message.filter)
+        : undefined);
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageRequest.toJSON(message.pagination)
@@ -303,6 +337,11 @@ export const QueryAllOrderRequest = {
 
   fromPartial(object: DeepPartial<QueryAllOrderRequest>): QueryAllOrderRequest {
     const message = { ...baseQueryAllOrderRequest } as QueryAllOrderRequest;
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = OrderFilter.fromPartial(object.filter);
+    } else {
+      message.filter = undefined;
+    }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
     } else {
@@ -402,6 +441,330 @@ export const QueryAllOrderResponse = {
   },
 };
 
+const baseQueryGetCompletedOrderRequest: object = { index: "" };
+
+export const QueryGetCompletedOrderRequest = {
+  encode(
+    message: QueryGetCompletedOrderRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetCompletedOrderRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetCompletedOrderRequest,
+    } as QueryGetCompletedOrderRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetCompletedOrderRequest {
+    const message = {
+      ...baseQueryGetCompletedOrderRequest,
+    } as QueryGetCompletedOrderRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetCompletedOrderRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetCompletedOrderRequest>
+  ): QueryGetCompletedOrderRequest {
+    const message = {
+      ...baseQueryGetCompletedOrderRequest,
+    } as QueryGetCompletedOrderRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetCompletedOrderResponse: object = {};
+
+export const QueryGetCompletedOrderResponse = {
+  encode(
+    message: QueryGetCompletedOrderResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.completedOrder !== undefined) {
+      CompletedOrder.encode(
+        message.completedOrder,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetCompletedOrderResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetCompletedOrderResponse,
+    } as QueryGetCompletedOrderResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.completedOrder = CompletedOrder.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetCompletedOrderResponse {
+    const message = {
+      ...baseQueryGetCompletedOrderResponse,
+    } as QueryGetCompletedOrderResponse;
+    if (object.completedOrder !== undefined && object.completedOrder !== null) {
+      message.completedOrder = CompletedOrder.fromJSON(object.completedOrder);
+    } else {
+      message.completedOrder = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetCompletedOrderResponse): unknown {
+    const obj: any = {};
+    message.completedOrder !== undefined &&
+      (obj.completedOrder = message.completedOrder
+        ? CompletedOrder.toJSON(message.completedOrder)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetCompletedOrderResponse>
+  ): QueryGetCompletedOrderResponse {
+    const message = {
+      ...baseQueryGetCompletedOrderResponse,
+    } as QueryGetCompletedOrderResponse;
+    if (object.completedOrder !== undefined && object.completedOrder !== null) {
+      message.completedOrder = CompletedOrder.fromPartial(
+        object.completedOrder
+      );
+    } else {
+      message.completedOrder = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllCompletedOrderRequest: object = {};
+
+export const QueryAllCompletedOrderRequest = {
+  encode(
+    message: QueryAllCompletedOrderRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllCompletedOrderRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllCompletedOrderRequest,
+    } as QueryAllCompletedOrderRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllCompletedOrderRequest {
+    const message = {
+      ...baseQueryAllCompletedOrderRequest,
+    } as QueryAllCompletedOrderRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllCompletedOrderRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllCompletedOrderRequest>
+  ): QueryAllCompletedOrderRequest {
+    const message = {
+      ...baseQueryAllCompletedOrderRequest,
+    } as QueryAllCompletedOrderRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllCompletedOrderResponse: object = {};
+
+export const QueryAllCompletedOrderResponse = {
+  encode(
+    message: QueryAllCompletedOrderResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.completedOrder) {
+      CompletedOrder.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllCompletedOrderResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllCompletedOrderResponse,
+    } as QueryAllCompletedOrderResponse;
+    message.completedOrder = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.completedOrder.push(
+            CompletedOrder.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllCompletedOrderResponse {
+    const message = {
+      ...baseQueryAllCompletedOrderResponse,
+    } as QueryAllCompletedOrderResponse;
+    message.completedOrder = [];
+    if (object.completedOrder !== undefined && object.completedOrder !== null) {
+      for (const e of object.completedOrder) {
+        message.completedOrder.push(CompletedOrder.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllCompletedOrderResponse): unknown {
+    const obj: any = {};
+    if (message.completedOrder) {
+      obj.completedOrder = message.completedOrder.map((e) =>
+        e ? CompletedOrder.toJSON(e) : undefined
+      );
+    } else {
+      obj.completedOrder = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllCompletedOrderResponse>
+  ): QueryAllCompletedOrderResponse {
+    const message = {
+      ...baseQueryAllCompletedOrderResponse,
+    } as QueryAllCompletedOrderResponse;
+    message.completedOrder = [];
+    if (object.completedOrder !== undefined && object.completedOrder !== null) {
+      for (const e of object.completedOrder) {
+        message.completedOrder.push(CompletedOrder.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -410,6 +773,14 @@ export interface Query {
   Order(request: QueryGetOrderRequest): Promise<QueryGetOrderResponse>;
   /** Queries a list of Order items. */
   OrderAll(request: QueryAllOrderRequest): Promise<QueryAllOrderResponse>;
+  /** Queries a CompletedOrder by index. */
+  CompletedOrder(
+    request: QueryGetCompletedOrderRequest
+  ): Promise<QueryGetCompletedOrderResponse>;
+  /** Queries a list of CompletedOrder items. */
+  CompletedOrderAll(
+    request: QueryAllCompletedOrderRequest
+  ): Promise<QueryAllCompletedOrderResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -448,6 +819,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllOrderResponse.decode(new Reader(data))
+    );
+  }
+
+  CompletedOrder(
+    request: QueryGetCompletedOrderRequest
+  ): Promise<QueryGetCompletedOrderResponse> {
+    const data = QueryGetCompletedOrderRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "txlabs.blocklesschain.market.Query",
+      "CompletedOrder",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetCompletedOrderResponse.decode(new Reader(data))
+    );
+  }
+
+  CompletedOrderAll(
+    request: QueryAllCompletedOrderRequest
+  ): Promise<QueryAllCompletedOrderResponse> {
+    const data = QueryAllCompletedOrderRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "txlabs.blocklesschain.market.Query",
+      "CompletedOrderAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllCompletedOrderResponse.decode(new Reader(data))
     );
   }
 }

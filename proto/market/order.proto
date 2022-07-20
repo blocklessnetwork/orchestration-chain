@@ -10,6 +10,9 @@ message Order {
   string customer = 4; 
   string height = 5; 
   string date = 6; 
-  
+  string state = 7;
 }
 
+message OrderFilter {
+  string customer = 1;
+}

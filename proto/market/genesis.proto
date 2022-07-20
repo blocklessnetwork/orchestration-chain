@@ -4,6 +4,7 @@ package txlabs.blocklesschain.market;
 import "gogoproto/gogo.proto";
 import "market/params.proto";
 import "market/order.proto";
+import "market/completed_order.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/txlabs/blockless-chain/x/market/types";
@@ -12,5 +13,6 @@ option go_package = "github.com/txlabs/blockless-chain/x/market/types";
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
   repeated Order orderList = 2 [(gogoproto.nullable) = false];
+  repeated CompletedOrder completedOrderList = 3 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

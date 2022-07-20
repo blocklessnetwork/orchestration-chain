@@ -14,6 +14,7 @@ export interface MsgSubmitOrderResponse {}
 export interface MsgSubmitCompletedOrder {
   creator: string;
   orderIndex: string;
+  fuelUsed: string;
 }
 
 export interface MsgSubmitCompletedOrderResponse {}
@@ -145,7 +146,11 @@ export const MsgSubmitOrderResponse = {
   },
 };
 
-const baseMsgSubmitCompletedOrder: object = { creator: "", orderIndex: "" };
+const baseMsgSubmitCompletedOrder: object = {
+  creator: "",
+  orderIndex: "",
+  fuelUsed: "",
+};
 
 export const MsgSubmitCompletedOrder = {
   encode(
@@ -157,6 +162,9 @@ export const MsgSubmitCompletedOrder = {
     }
     if (message.orderIndex !== "") {
       writer.uint32(18).string(message.orderIndex);
+    }
+    if (message.fuelUsed !== "") {
+      writer.uint32(26).string(message.fuelUsed);
     }
     return writer;
   },
@@ -175,6 +183,9 @@ export const MsgSubmitCompletedOrder = {
           break;
         case 2:
           message.orderIndex = reader.string();
+          break;
+        case 3:
+          message.fuelUsed = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -198,6 +209,11 @@ export const MsgSubmitCompletedOrder = {
     } else {
       message.orderIndex = "";
     }
+    if (object.fuelUsed !== undefined && object.fuelUsed !== null) {
+      message.fuelUsed = String(object.fuelUsed);
+    } else {
+      message.fuelUsed = "";
+    }
     return message;
   },
 
@@ -205,6 +221,7 @@ export const MsgSubmitCompletedOrder = {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
     message.orderIndex !== undefined && (obj.orderIndex = message.orderIndex);
+    message.fuelUsed !== undefined && (obj.fuelUsed = message.fuelUsed);
     return obj;
   },
 
@@ -223,6 +240,11 @@ export const MsgSubmitCompletedOrder = {
       message.orderIndex = object.orderIndex;
     } else {
       message.orderIndex = "";
+    }
+    if (object.fuelUsed !== undefined && object.fuelUsed !== null) {
+      message.fuelUsed = object.fuelUsed;
+    } else {
+      message.fuelUsed = "";
     }
     return message;
   },

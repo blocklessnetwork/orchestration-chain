@@ -9,10 +9,11 @@ const TypeMsgSubmitCompletedOrder = "submit_completed_order"
 
 var _ sdk.Msg = &MsgSubmitCompletedOrder{}
 
-func NewMsgSubmitCompletedOrder(creator string, orderIndex string) *MsgSubmitCompletedOrder {
+func NewMsgSubmitCompletedOrder(creator string, orderIndex string, fuel string) *MsgSubmitCompletedOrder {
 	return &MsgSubmitCompletedOrder{
 		Creator:    creator,
 		OrderIndex: orderIndex,
+		FuelUsed:   fuel,
 	}
 }
 

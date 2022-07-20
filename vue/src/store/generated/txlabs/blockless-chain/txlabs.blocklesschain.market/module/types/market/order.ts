@@ -10,6 +10,11 @@ export interface Order {
   customer: string;
   height: string;
   date: string;
+  state: string;
+}
+
+export interface OrderFilter {
+  customer: string;
 }
 
 const baseOrder: object = {
@@ -19,6 +24,7 @@ const baseOrder: object = {
   customer: "",
   height: "",
   date: "",
+  state: "",
 };
 
 export const Order = {
@@ -40,6 +46,9 @@ export const Order = {
     }
     if (message.date !== "") {
       writer.uint32(50).string(message.date);
+    }
+    if (message.state !== "") {
+      writer.uint32(58).string(message.state);
     }
     return writer;
   },
@@ -68,6 +77,9 @@ export const Order = {
           break;
         case 6:
           message.date = reader.string();
+          break;
+        case 7:
+          message.state = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -109,6 +121,11 @@ export const Order = {
     } else {
       message.date = "";
     }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = String(object.state);
+    } else {
+      message.state = "";
+    }
     return message;
   },
 
@@ -120,6 +137,7 @@ export const Order = {
     message.customer !== undefined && (obj.customer = message.customer);
     message.height !== undefined && (obj.height = message.height);
     message.date !== undefined && (obj.date = message.date);
+    message.state !== undefined && (obj.state = message.state);
     return obj;
   },
 
@@ -154,6 +172,66 @@ export const Order = {
       message.date = object.date;
     } else {
       message.date = "";
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    } else {
+      message.state = "";
+    }
+    return message;
+  },
+};
+
+const baseOrderFilter: object = { customer: "" };
+
+export const OrderFilter = {
+  encode(message: OrderFilter, writer: Writer = Writer.create()): Writer {
+    if (message.customer !== "") {
+      writer.uint32(10).string(message.customer);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): OrderFilter {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseOrderFilter } as OrderFilter;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.customer = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): OrderFilter {
+    const message = { ...baseOrderFilter } as OrderFilter;
+    if (object.customer !== undefined && object.customer !== null) {
+      message.customer = String(object.customer);
+    } else {
+      message.customer = "";
+    }
+    return message;
+  },
+
+  toJSON(message: OrderFilter): unknown {
+    const obj: any = {};
+    message.customer !== undefined && (obj.customer = message.customer);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<OrderFilter>): OrderFilter {
+    const message = { ...baseOrderFilter } as OrderFilter;
+    if (object.customer !== undefined && object.customer !== null) {
+      message.customer = object.customer;
+    } else {
+      message.customer = "";
     }
     return message;
   },

@@ -30,6 +30,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
+				CompletedOrderList: []types.CompletedOrder{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -38,6 +46,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated order",
 			genState: &types.GenesisState{
 				OrderList: []types.Order{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated completedOrder",
+			genState: &types.GenesisState{
+				CompletedOrderList: []types.CompletedOrder{
 					{
 						Index: "0",
 					},

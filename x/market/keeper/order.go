@@ -56,6 +56,7 @@ func (k Keeper) GetAllOrder(ctx sdk.Context) (list []types.Order) {
 	for ; iterator.Valid(); iterator.Next() {
 		var val types.Order
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
+
 		list = append(list, val)
 	}
 

@@ -1,10 +1,12 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
+import { CompletedOrder } from "./module/types/market/completed_order"
 import { Order } from "./module/types/market/order"
+import { OrderFilter } from "./module/types/market/order"
 import { Params } from "./module/types/market/params"
 
 
-export { Order, Params };
+export { CompletedOrder, Order, OrderFilter, Params };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -45,9 +47,13 @@ const getDefaultState = () => {
 				Params: {},
 				Order: {},
 				OrderAll: {},
+				CompletedOrder: {},
+				CompletedOrderAll: {},
 				
 				_Structure: {
+						CompletedOrder: getStructure(CompletedOrder.fromPartial({})),
 						Order: getStructure(Order.fromPartial({})),
+						OrderFilter: getStructure(OrderFilter.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
 						
 		},
@@ -94,6 +100,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.OrderAll[JSON.stringify(params)] ?? {}
+		},
+				getCompletedOrder: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.CompletedOrder[JSON.stringify(params)] ?? {}
+		},
+				getCompletedOrderAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.CompletedOrderAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -199,21 +217,54 @@ export default {
 		},
 		
 		
-		async sendMsgSubmitOrder({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		 		
+		
+		
+		async QueryCompletedOrder({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgSubmitOrder(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryCompletedOrder( key.index)).data
+				
+					
+				commit('QUERY', { query: 'CompletedOrder', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryCompletedOrder', payload: { options: { all }, params: {...key},query }})
+				return getters['getCompletedOrder']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgSubmitOrder:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgSubmitOrder:Send Could not broadcast Tx: '+ e.message)
-				}
+				throw new Error('QueryClient:QueryCompletedOrder API Node Unavailable. Could not perform query: ' + e.message)
+				
 			}
 		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryCompletedOrderAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryCompletedOrderAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryCompletedOrderAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'CompletedOrderAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryCompletedOrderAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getCompletedOrderAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryCompletedOrderAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
 		async sendMsgSubmitCompletedOrder({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -229,20 +280,22 @@ export default {
 				}
 			}
 		},
-		
-		async MsgSubmitOrder({ rootGetters }, { value }) {
+		async sendMsgSubmitOrder({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
 				const msg = await txClient.msgSubmitOrder(value)
-				return msg
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
 					throw new Error('TxClient:MsgSubmitOrder:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgSubmitOrder:Create Could not create message: ' + e.message)
+				}else{
+					throw new Error('TxClient:MsgSubmitOrder:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
+		
 		async MsgSubmitCompletedOrder({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -253,6 +306,19 @@ export default {
 					throw new Error('TxClient:MsgSubmitCompletedOrder:Init Could not initialize signing client. Wallet is required.')
 				} else{
 					throw new Error('TxClient:MsgSubmitCompletedOrder:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgSubmitOrder({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgSubmitOrder(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgSubmitOrder:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgSubmitOrder:Create Could not create message: ' + e.message)
 				}
 			}
 		},

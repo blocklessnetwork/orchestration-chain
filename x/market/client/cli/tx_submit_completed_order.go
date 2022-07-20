@@ -16,9 +16,10 @@ func CmdSubmitCompletedOrder() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "submit-completed-order [order-index]",
 		Short: "Broadcast message submit-completed-order",
-		Args:  cobra.ExactArgs(1),
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			argOrderIndex := args[0]
+			argFuelUsed := args[1]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -28,7 +29,9 @@ func CmdSubmitCompletedOrder() *cobra.Command {
 			msg := types.NewMsgSubmitCompletedOrder(
 				clientCtx.GetFromAddress().String(),
 				argOrderIndex,
+				argFuelUsed,
 			)
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}

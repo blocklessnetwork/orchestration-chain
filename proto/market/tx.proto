@@ -24,6 +24,7 @@ message MsgSubmitOrderResponse {
 message MsgSubmitCompletedOrder {
   string creator = 1;
   string orderIndex = 2;
+  string fuelUsed = 3;
 }
 
 message MsgSubmitCompletedOrderResponse {

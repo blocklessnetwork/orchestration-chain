@@ -28,7 +28,14 @@ func (k Keeper) OrderAll(c context.Context, req *types.QueryAllOrderRequest) (*t
 			return err
 		}
 
-		orders = append(orders, order)
+		if req.Filter != nil {
+			if len(req.Filter.Customer) > 0 && (order.Customer == req.Filter.Customer) {
+				orders = append(orders, order)
+			}
+		} else {
+			orders = append(orders, order)
+		}
+
 		return nil
 	})
 

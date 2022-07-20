@@ -9,6 +9,15 @@
  * ---------------------------------------------------------------
  */
 
+export interface MarketCompletedOrder {
+  index?: string;
+  orderIndex?: string;
+  completedBy?: string;
+  height?: string;
+  date?: string;
+  fuelUsed?: string;
+}
+
 export type MarketMsgSubmitCompletedOrderResponse = object;
 
 export type MarketMsgSubmitOrderResponse = object;
@@ -20,12 +29,32 @@ export interface MarketOrder {
   customer?: string;
   height?: string;
   date?: string;
+  state?: string;
+}
+
+export interface MarketOrderFilter {
+  customer?: string;
 }
 
 /**
  * Params defines the parameters for the module.
  */
 export type MarketParams = object;
+
+export interface MarketQueryAllCompletedOrderResponse {
+  completedOrder?: MarketCompletedOrder[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
 
 export interface MarketQueryAllOrderResponse {
   order?: MarketOrder[];
@@ -40,6 +69,10 @@ export interface MarketQueryAllOrderResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
+}
+
+export interface MarketQueryGetCompletedOrderResponse {
+  completedOrder?: MarketCompletedOrder;
 }
 
 export interface MarketQueryGetOrderResponse {
@@ -320,10 +353,52 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title market/genesis.proto
+ * @title market/completed_order.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryCompletedOrderAll
+   * @summary Queries a list of CompletedOrder items.
+   * @request GET:/txlabs/blockless-chain/market/completed_order
+   */
+  queryCompletedOrderAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<MarketQueryAllCompletedOrderResponse, RpcStatus>({
+      path: `/txlabs/blockless-chain/market/completed_order`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryCompletedOrder
+   * @summary Queries a CompletedOrder by index.
+   * @request GET:/txlabs/blockless-chain/market/completed_order/{index}
+   */
+  queryCompletedOrder = (index: string, params: RequestParams = {}) =>
+    this.request<MarketQueryGetCompletedOrderResponse, RpcStatus>({
+      path: `/txlabs/blockless-chain/market/completed_order/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *
@@ -334,6 +409,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    */
   queryOrderAll = (
     query?: {
+      "filter.customer"?: string;
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;

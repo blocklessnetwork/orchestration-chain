@@ -22,6 +22,7 @@ func (k msgServer) SubmitOrder(goCtx context.Context, msg *types.MsgSubmitOrder)
 		Fuel:       msg.Fuel,
 		Height:     height,
 		Date:       currentTime.String(),
+		State:      "open",
 	}
 
 	// try getting a order from the store using the solution hash as the key
@@ -47,6 +48,7 @@ func (k msgServer) SubmitOrder(goCtx context.Context, msg *types.MsgSubmitOrder)
 	if err != nil {
 		panic(err)
 	}
+
 	// send tokens from the scavenge creator to the module account
 	sdkError := k.bankKeeper.SendCoins(ctx, customer, moduleAcct, reward)
 	if sdkError != nil {
