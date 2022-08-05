@@ -1,6 +1,6 @@
 # blocklesschain
 
-**blocklesschain** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli). It's current support is limited to *amd64* locations.
+**blocklesschain** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli). It's current support is limited to **amd64** environments.
 
 ## Get started
 
