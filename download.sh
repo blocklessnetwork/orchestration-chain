@@ -71,7 +71,7 @@ function install {
 		FTYPE=".tar.gz"
 		;;
 	"darwin_arm64")
-		URL="https://github.com/txlabs/blockless-chain/releases/download/latest/bls-macos-arm64-blockless-cli.tar.gz"
+		URL="https://github.com/txlabs/blockless-chain/releases/download/latest/bls-macos-x64-blockless-cli.tar.gz"
 		FTYPE=".tar.gz"
 		;;
 	"linux_amd64")
