@@ -22,6 +22,7 @@ func (k msgServer) SubmitCompletedOrder(goCtx context.Context, msg *types.MsgSub
 		CompletedBy: msg.Creator,
 		FuelUsed:    msg.FuelUsed,
 		Height:      height,
+		ResponseId:  msg.ResponseId,
 		Date:        currentTime.String(),
 	}
 

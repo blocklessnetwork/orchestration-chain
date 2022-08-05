@@ -3,6 +3,7 @@ import { Params } from "../market/params";
 import { Order } from "../market/order";
 import { CompletedOrder } from "../market/completed_order";
 import { ClaimedOrder } from "../market/claimed_order";
+import { NodeRegistration } from "../market/node_registration";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "txlabs.blocklesschain.market";
@@ -12,8 +13,9 @@ export interface GenesisState {
   params: Params | undefined;
   orderList: Order[];
   completedOrderList: CompletedOrder[];
-  /** this line is used by starport scaffolding # genesis/proto/state */
   claimedOrderList: ClaimedOrder[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  nodeRegistrationList: NodeRegistration[];
 }
 
 const baseGenesisState: object = {};
@@ -32,6 +34,9 @@ export const GenesisState = {
     for (const v of message.claimedOrderList) {
       ClaimedOrder.encode(v!, writer.uint32(34).fork()).ldelim();
     }
+    for (const v of message.nodeRegistrationList) {
+      NodeRegistration.encode(v!, writer.uint32(42).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -42,6 +47,7 @@ export const GenesisState = {
     message.orderList = [];
     message.completedOrderList = [];
     message.claimedOrderList = [];
+    message.nodeRegistrationList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -61,6 +67,11 @@ export const GenesisState = {
             ClaimedOrder.decode(reader, reader.uint32())
           );
           break;
+        case 5:
+          message.nodeRegistrationList.push(
+            NodeRegistration.decode(reader, reader.uint32())
+          );
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -74,6 +85,7 @@ export const GenesisState = {
     message.orderList = [];
     message.completedOrderList = [];
     message.claimedOrderList = [];
+    message.nodeRegistrationList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -98,6 +110,14 @@ export const GenesisState = {
     ) {
       for (const e of object.claimedOrderList) {
         message.claimedOrderList.push(ClaimedOrder.fromJSON(e));
+      }
+    }
+    if (
+      object.nodeRegistrationList !== undefined &&
+      object.nodeRegistrationList !== null
+    ) {
+      for (const e of object.nodeRegistrationList) {
+        message.nodeRegistrationList.push(NodeRegistration.fromJSON(e));
       }
     }
     return message;
@@ -128,6 +148,13 @@ export const GenesisState = {
     } else {
       obj.claimedOrderList = [];
     }
+    if (message.nodeRegistrationList) {
+      obj.nodeRegistrationList = message.nodeRegistrationList.map((e) =>
+        e ? NodeRegistration.toJSON(e) : undefined
+      );
+    } else {
+      obj.nodeRegistrationList = [];
+    }
     return obj;
   },
 
@@ -136,6 +163,7 @@ export const GenesisState = {
     message.orderList = [];
     message.completedOrderList = [];
     message.claimedOrderList = [];
+    message.nodeRegistrationList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -160,6 +188,14 @@ export const GenesisState = {
     ) {
       for (const e of object.claimedOrderList) {
         message.claimedOrderList.push(ClaimedOrder.fromPartial(e));
+      }
+    }
+    if (
+      object.nodeRegistrationList !== undefined &&
+      object.nodeRegistrationList !== null
+    ) {
+      for (const e of object.nodeRegistrationList) {
+        message.nodeRegistrationList.push(NodeRegistration.fromPartial(e));
       }
     }
     return message;

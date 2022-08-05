@@ -11,7 +11,6 @@
 
 export interface MarketClaimedOrder {
   index?: string;
-  orderIndex?: string;
   claimedBy?: string;
   claimedHeight?: string;
   date?: string;
@@ -24,14 +23,27 @@ export interface MarketCompletedOrder {
   height?: string;
   date?: string;
   fuelUsed?: string;
+  responseId?: string;
 }
 
 export type MarketMsgClaimOrderWorkResponse = object;
+
+export type MarketMsgRegisterHeadNodeResponse = object;
 
 export type MarketMsgSubmitCompletedOrderResponse = object;
 
 export interface MarketMsgSubmitOrderResponse {
   orderIndex?: string;
+}
+
+export interface MarketNodeRegistration {
+  index?: string;
+  nodeId?: string;
+  nodePort?: string;
+  nodeIp?: string;
+  nodeOwner?: string;
+  height?: string;
+  date?: string;
 }
 
 export interface MarketOrder {
@@ -84,6 +96,21 @@ export interface MarketQueryAllCompletedOrderResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface MarketQueryAllNodeRegistrationResponse {
+  nodeRegistration?: MarketNodeRegistration[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface MarketQueryAllOrderResponse {
   order?: MarketOrder[];
 
@@ -105,6 +132,10 @@ export interface MarketQueryGetClaimedOrderResponse {
 
 export interface MarketQueryGetCompletedOrderResponse {
   completedOrder?: MarketCompletedOrder;
+}
+
+export interface MarketQueryGetNodeRegistrationResponse {
+  nodeRegistration?: MarketNodeRegistration;
 }
 
 export interface MarketQueryGetOrderResponse {
@@ -468,6 +499,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryCompletedOrder = (index: string, params: RequestParams = {}) =>
     this.request<MarketQueryGetCompletedOrderResponse, RpcStatus>({
       path: `/txlabs/blockless-chain/market/completed_order/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryNodeRegistrationAll
+   * @summary Queries a list of NodeRegistration items.
+   * @request GET:/txlabs/blockless-chain/market/node_registration
+   */
+  queryNodeRegistrationAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<MarketQueryAllNodeRegistrationResponse, RpcStatus>({
+      path: `/txlabs/blockless-chain/market/node_registration`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryNodeRegistration
+   * @summary Queries a NodeRegistration by index.
+   * @request GET:/txlabs/blockless-chain/market/node_registration/{index}
+   */
+  queryNodeRegistration = (index: string, params: RequestParams = {}) =>
+    this.request<MarketQueryGetNodeRegistrationResponse, RpcStatus>({
+      path: `/txlabs/blockless-chain/market/node_registration/${index}`,
       method: "GET",
       format: "json",
       ...params,

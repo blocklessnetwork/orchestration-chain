@@ -135,6 +135,7 @@ type MsgSubmitCompletedOrder struct {
 	Creator    string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	OrderIndex string `protobuf:"bytes,2,opt,name=orderIndex,proto3" json:"orderIndex,omitempty"`
 	FuelUsed   string `protobuf:"bytes,3,opt,name=fuelUsed,proto3" json:"fuelUsed,omitempty"`
+	ResponseId string `protobuf:"bytes,4,opt,name=responseId,proto3" json:"responseId,omitempty"`
 }
 
 func (m *MsgSubmitCompletedOrder) Reset()         { *m = MsgSubmitCompletedOrder{} }
@@ -187,6 +188,13 @@ func (m *MsgSubmitCompletedOrder) GetOrderIndex() string {
 func (m *MsgSubmitCompletedOrder) GetFuelUsed() string {
 	if m != nil {
 		return m.FuelUsed
+	}
+	return ""
+}
+
+func (m *MsgSubmitCompletedOrder) GetResponseId() string {
+	if m != nil {
+		return m.ResponseId
 	}
 	return ""
 }
@@ -315,6 +323,118 @@ func (m *MsgClaimOrderWorkResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgClaimOrderWorkResponse proto.InternalMessageInfo
 
+type MsgRegisterHeadNode struct {
+	Creator   string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	NodeId    string `protobuf:"bytes,2,opt,name=nodeId,proto3" json:"nodeId,omitempty"`
+	NodePort  string `protobuf:"bytes,3,opt,name=nodePort,proto3" json:"nodePort,omitempty"`
+	NodeIp    string `protobuf:"bytes,4,opt,name=nodeIp,proto3" json:"nodeIp,omitempty"`
+	NodeOwner string `protobuf:"bytes,5,opt,name=nodeOwner,proto3" json:"nodeOwner,omitempty"`
+}
+
+func (m *MsgRegisterHeadNode) Reset()         { *m = MsgRegisterHeadNode{} }
+func (m *MsgRegisterHeadNode) String() string { return proto.CompactTextString(m) }
+func (*MsgRegisterHeadNode) ProtoMessage()    {}
+func (*MsgRegisterHeadNode) Descriptor() ([]byte, []int) {
+	return fileDescriptor_2966ca2342567dca, []int{6}
+}
+func (m *MsgRegisterHeadNode) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgRegisterHeadNode) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgRegisterHeadNode.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgRegisterHeadNode) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgRegisterHeadNode.Merge(m, src)
+}
+func (m *MsgRegisterHeadNode) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgRegisterHeadNode) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgRegisterHeadNode.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgRegisterHeadNode proto.InternalMessageInfo
+
+func (m *MsgRegisterHeadNode) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgRegisterHeadNode) GetNodeId() string {
+	if m != nil {
+		return m.NodeId
+	}
+	return ""
+}
+
+func (m *MsgRegisterHeadNode) GetNodePort() string {
+	if m != nil {
+		return m.NodePort
+	}
+	return ""
+}
+
+func (m *MsgRegisterHeadNode) GetNodeIp() string {
+	if m != nil {
+		return m.NodeIp
+	}
+	return ""
+}
+
+func (m *MsgRegisterHeadNode) GetNodeOwner() string {
+	if m != nil {
+		return m.NodeOwner
+	}
+	return ""
+}
+
+type MsgRegisterHeadNodeResponse struct {
+}
+
+func (m *MsgRegisterHeadNodeResponse) Reset()         { *m = MsgRegisterHeadNodeResponse{} }
+func (m *MsgRegisterHeadNodeResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgRegisterHeadNodeResponse) ProtoMessage()    {}
+func (*MsgRegisterHeadNodeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_2966ca2342567dca, []int{7}
+}
+func (m *MsgRegisterHeadNodeResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgRegisterHeadNodeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgRegisterHeadNodeResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgRegisterHeadNodeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgRegisterHeadNodeResponse.Merge(m, src)
+}
+func (m *MsgRegisterHeadNodeResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgRegisterHeadNodeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgRegisterHeadNodeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgRegisterHeadNodeResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*MsgSubmitOrder)(nil), "txlabs.blocklesschain.market.MsgSubmitOrder")
 	proto.RegisterType((*MsgSubmitOrderResponse)(nil), "txlabs.blocklesschain.market.MsgSubmitOrderResponse")
@@ -322,36 +442,44 @@ func init() {
 	proto.RegisterType((*MsgSubmitCompletedOrderResponse)(nil), "txlabs.blocklesschain.market.MsgSubmitCompletedOrderResponse")
 	proto.RegisterType((*MsgClaimOrderWork)(nil), "txlabs.blocklesschain.market.MsgClaimOrderWork")
 	proto.RegisterType((*MsgClaimOrderWorkResponse)(nil), "txlabs.blocklesschain.market.MsgClaimOrderWorkResponse")
+	proto.RegisterType((*MsgRegisterHeadNode)(nil), "txlabs.blocklesschain.market.MsgRegisterHeadNode")
+	proto.RegisterType((*MsgRegisterHeadNodeResponse)(nil), "txlabs.blocklesschain.market.MsgRegisterHeadNodeResponse")
 }
 
 func init() { proto.RegisterFile("market/tx.proto", fileDescriptor_2966ca2342567dca) }
 
 var fileDescriptor_2966ca2342567dca = []byte{
-	// 371 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcf, 0x4d, 0x2c, 0xca,
-	0x4e, 0x2d, 0xd1, 0x2f, 0xa9, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x92, 0x29, 0xa9, 0xc8,
-	0x49, 0x4c, 0x2a, 0xd6, 0x4b, 0xca, 0xc9, 0x4f, 0xce, 0xce, 0x49, 0x2d, 0x2e, 0x4e, 0xce, 0x48,
-	0xcc, 0xcc, 0xd3, 0x83, 0x28, 0x53, 0x8a, 0xe3, 0xe2, 0xf3, 0x2d, 0x4e, 0x0f, 0x2e, 0x4d, 0xca,
-	0xcd, 0x2c, 0xf1, 0x2f, 0x4a, 0x49, 0x2d, 0x12, 0x92, 0xe0, 0x62, 0x4f, 0x2e, 0x4a, 0x4d, 0x2c,
-	0xc9, 0x2f, 0x92, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x82, 0x71, 0x85, 0xe4, 0xb8, 0xb8, 0xd2,
-	0x4a, 0xf3, 0x92, 0x4b, 0x32, 0xf3, 0xf3, 0x3c, 0x53, 0x24, 0x98, 0xc0, 0x92, 0x48, 0x22, 0x42,
-	0x42, 0x5c, 0x2c, 0x69, 0xa5, 0xa9, 0x39, 0x12, 0xcc, 0x60, 0x19, 0x30, 0x5b, 0xc9, 0x82, 0x4b,
-	0x0c, 0xd5, 0xfc, 0xa0, 0xd4, 0xe2, 0x82, 0xfc, 0xbc, 0xe2, 0x54, 0x90, 0x69, 0xf9, 0x20, 0x01,
-	0xcf, 0xbc, 0x94, 0xd4, 0x0a, 0xa8, 0x55, 0x48, 0x22, 0x4a, 0xf9, 0x5c, 0xe2, 0x70, 0x9d, 0xce,
-	0xf9, 0xb9, 0x05, 0x39, 0xa9, 0x25, 0xa9, 0x29, 0x44, 0x38, 0x11, 0xc9, 0x50, 0x26, 0x74, 0x43,
-	0x85, 0xa4, 0xb8, 0x38, 0x40, 0xce, 0x0a, 0x2d, 0x4e, 0x4d, 0x81, 0x3a, 0x13, 0xce, 0x57, 0x52,
-	0xe4, 0x92, 0xc7, 0x61, 0x21, 0xcc, 0xcd, 0x4a, 0xbe, 0x5c, 0x82, 0xbe, 0xc5, 0xe9, 0xce, 0x39,
-	0x89, 0x99, 0xb9, 0x60, 0x89, 0xf0, 0xfc, 0xa2, 0x6c, 0xf2, 0x5d, 0xa3, 0x24, 0xcd, 0x25, 0x89,
-	0x61, 0x1c, 0xcc, 0x2e, 0xa3, 0x66, 0x66, 0x2e, 0x66, 0xdf, 0xe2, 0x74, 0xa1, 0x42, 0x2e, 0x6e,
-	0xe4, 0xe8, 0xd1, 0xd1, 0xc3, 0x17, 0x9f, 0x7a, 0xa8, 0x81, 0x2d, 0x65, 0x42, 0x8a, 0x6a, 0x78,
-	0xd4, 0xf4, 0x30, 0x72, 0x89, 0x60, 0x0d, 0x78, 0x53, 0x22, 0x8d, 0x43, 0xd5, 0x26, 0x65, 0x4b,
-	0x96, 0x36, 0xb8, 0x73, 0xaa, 0xb8, 0xf8, 0xd0, 0x82, 0x5c, 0x9f, 0xa0, 0x81, 0xa8, 0x1a, 0xa4,
-	0xcc, 0x49, 0xd4, 0x00, 0xb3, 0xdb, 0xc9, 0xeb, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18,
-	0x1f, 0x3c, 0x92, 0x63, 0x9c, 0xf0, 0x58, 0x8e, 0xe1, 0xc2, 0x63, 0x39, 0x86, 0x1b, 0x8f, 0xe5,
-	0x18, 0xa2, 0x0c, 0xd2, 0x33, 0x4b, 0x32, 0x4a, 0x93, 0xf4, 0x92, 0xf3, 0x73, 0xf5, 0x21, 0x86,
-	0xeb, 0xc3, 0x0d, 0xd7, 0x05, 0x9b, 0xae, 0x5f, 0xa1, 0x0f, 0xcb, 0x8c, 0x95, 0x05, 0xa9, 0xc5,
-	0x49, 0x6c, 0xe0, 0x0c, 0x69, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x7a, 0xcb, 0xb4, 0x4b, 0xa3,
-	0x03, 0x00, 0x00,
+	// 475 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0x3d, 0x6f, 0xd4, 0x40,
+	0x10, 0xbd, 0x4d, 0x8e, 0x40, 0x06, 0x29, 0xc0, 0x82, 0x82, 0x71, 0x82, 0x01, 0x57, 0x14, 0x60,
+	0xf3, 0x29, 0xa0, 0xa0, 0x21, 0x0d, 0x87, 0x64, 0x82, 0x0e, 0x21, 0x24, 0x0a, 0x24, 0xdb, 0x3b,
+	0x71, 0xac, 0xb3, 0xbd, 0x66, 0x77, 0x4f, 0x1c, 0x54, 0x54, 0x54, 0x48, 0xd0, 0xf2, 0x8f, 0x28,
+	0x53, 0x52, 0xa2, 0xbb, 0x3f, 0x82, 0xec, 0xb3, 0x37, 0xf6, 0xe5, 0xf3, 0xae, 0xdb, 0x79, 0xb3,
+	0xef, 0xcd, 0xf3, 0xf8, 0x69, 0xe1, 0x42, 0xea, 0x8b, 0x01, 0x2a, 0x57, 0x8d, 0x9c, 0x5c, 0x70,
+	0xc5, 0xe9, 0xa6, 0x1a, 0x25, 0x7e, 0x20, 0x9d, 0x20, 0xe1, 0xe1, 0x20, 0x41, 0x29, 0xc3, 0x5d,
+	0x3f, 0xce, 0x9c, 0xe9, 0x35, 0xfb, 0x23, 0xac, 0x79, 0x32, 0x7a, 0x3b, 0x0c, 0xd2, 0x58, 0x6d,
+	0x0b, 0x86, 0x82, 0x1a, 0x70, 0x36, 0x14, 0xe8, 0x2b, 0x2e, 0x0c, 0x72, 0x93, 0xdc, 0x5e, 0xed,
+	0xd7, 0x25, 0xb5, 0x00, 0x76, 0x86, 0x59, 0xa8, 0x62, 0x9e, 0xf5, 0x98, 0xb1, 0x54, 0x36, 0x1b,
+	0x08, 0xa5, 0xd0, 0xdd, 0x19, 0x62, 0x62, 0x2c, 0x97, 0x9d, 0xf2, 0x6c, 0x3f, 0x85, 0xf5, 0xb6,
+	0x7e, 0x1f, 0x65, 0xce, 0x33, 0x89, 0x85, 0x1a, 0x2f, 0x80, 0x5e, 0xc6, 0x70, 0x54, 0x8d, 0x6a,
+	0x20, 0xf6, 0x4f, 0x02, 0x57, 0x35, 0x75, 0x8b, 0xa7, 0x79, 0x82, 0x0a, 0xd9, 0x29, 0x3c, 0x36,
+	0x54, 0x97, 0x66, 0x55, 0xa9, 0x09, 0xe7, 0x0a, 0x5f, 0xef, 0x24, 0xb2, 0xca, 0xa7, 0xae, 0x0b,
+	0xae, 0xa8, 0xdc, 0xf5, 0x98, 0xd1, 0x9d, 0x72, 0xf7, 0x11, 0xfb, 0x16, 0xdc, 0x38, 0xc2, 0x50,
+	0xfd, 0x51, 0xb6, 0x07, 0x97, 0x3c, 0x19, 0x6d, 0x25, 0x7e, 0x9c, 0x96, 0x8d, 0xf7, 0x5c, 0x0c,
+	0x16, 0x77, 0x6b, 0x6f, 0xc0, 0xb5, 0x03, 0x72, 0x7a, 0xd6, 0x6f, 0x02, 0x97, 0x3d, 0x19, 0xf5,
+	0x31, 0x8a, 0xa5, 0x42, 0xf1, 0x12, 0x7d, 0xf6, 0x9a, 0x33, 0x3c, 0x66, 0xdc, 0x3a, 0xac, 0x64,
+	0x9c, 0xa1, 0xfe, 0x79, 0x55, 0x55, 0x2c, 0xa5, 0x38, 0xbd, 0xe1, 0x42, 0xd5, 0x4b, 0xa9, 0x6b,
+	0xcd, 0xc9, 0xab, 0x85, 0x54, 0x15, 0xdd, 0x84, 0xd5, 0xe2, 0xb4, 0xfd, 0x39, 0x43, 0x61, 0x9c,
+	0x29, 0x5b, 0xfb, 0x80, 0x7d, 0x1d, 0x36, 0x0e, 0xb1, 0x56, 0x5b, 0x7f, 0xf0, 0xbd, 0x0b, 0xcb,
+	0x9e, 0x8c, 0xe8, 0x27, 0x38, 0xdf, 0x8c, 0xde, 0x1d, 0xe7, 0xb8, 0xac, 0x3a, 0xed, 0x20, 0x99,
+	0x8f, 0xe6, 0xb9, 0xad, 0x63, 0xf7, 0x83, 0xc0, 0x95, 0x43, 0x33, 0xf5, 0xf8, 0x94, 0x72, 0x6d,
+	0x9a, 0xf9, 0x7c, 0x21, 0x9a, 0xb6, 0xf3, 0x15, 0xd6, 0x66, 0xd2, 0xe2, 0x9e, 0x28, 0xd8, 0x26,
+	0x98, 0x4f, 0xe6, 0x24, 0xe8, 0xd9, 0xdf, 0x08, 0x5c, 0x3c, 0x90, 0x9e, 0xfb, 0x27, 0xaa, 0xcd,
+	0x52, 0xcc, 0x67, 0x73, 0x53, 0x6a, 0x0b, 0x2f, 0x5e, 0xfd, 0x19, 0x5b, 0x64, 0x6f, 0x6c, 0x91,
+	0x7f, 0x63, 0x8b, 0xfc, 0x9a, 0x58, 0x9d, 0xbd, 0x89, 0xd5, 0xf9, 0x3b, 0xb1, 0x3a, 0x1f, 0xee,
+	0x45, 0xb1, 0xda, 0x1d, 0x06, 0x4e, 0xc8, 0x53, 0x77, 0x2a, 0xef, 0x6a, 0xf9, 0xbb, 0xa5, 0xbe,
+	0x3b, 0x72, 0xeb, 0xb7, 0xee, 0x4b, 0x8e, 0x32, 0x58, 0x29, 0xdf, 0xbb, 0x87, 0xff, 0x03, 0x00,
+	0x00, 0xff, 0xff, 0x05, 0x09, 0x6f, 0xc5, 0x02, 0x05, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -369,6 +497,7 @@ type MsgClient interface {
 	SubmitOrder(ctx context.Context, in *MsgSubmitOrder, opts ...grpc.CallOption) (*MsgSubmitOrderResponse, error)
 	SubmitCompletedOrder(ctx context.Context, in *MsgSubmitCompletedOrder, opts ...grpc.CallOption) (*MsgSubmitCompletedOrderResponse, error)
 	ClaimOrderWork(ctx context.Context, in *MsgClaimOrderWork, opts ...grpc.CallOption) (*MsgClaimOrderWorkResponse, error)
+	RegisterHeadNode(ctx context.Context, in *MsgRegisterHeadNode, opts ...grpc.CallOption) (*MsgRegisterHeadNodeResponse, error)
 }
 
 type msgClient struct {
@@ -406,11 +535,21 @@ func (c *msgClient) ClaimOrderWork(ctx context.Context, in *MsgClaimOrderWork, o
 	return out, nil
 }
 
+func (c *msgClient) RegisterHeadNode(ctx context.Context, in *MsgRegisterHeadNode, opts ...grpc.CallOption) (*MsgRegisterHeadNodeResponse, error) {
+	out := new(MsgRegisterHeadNodeResponse)
+	err := c.cc.Invoke(ctx, "/txlabs.blocklesschain.market.Msg/RegisterHeadNode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	SubmitOrder(context.Context, *MsgSubmitOrder) (*MsgSubmitOrderResponse, error)
 	SubmitCompletedOrder(context.Context, *MsgSubmitCompletedOrder) (*MsgSubmitCompletedOrderResponse, error)
 	ClaimOrderWork(context.Context, *MsgClaimOrderWork) (*MsgClaimOrderWorkResponse, error)
+	RegisterHeadNode(context.Context, *MsgRegisterHeadNode) (*MsgRegisterHeadNodeResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -425,6 +564,9 @@ func (*UnimplementedMsgServer) SubmitCompletedOrder(ctx context.Context, req *Ms
 }
 func (*UnimplementedMsgServer) ClaimOrderWork(ctx context.Context, req *MsgClaimOrderWork) (*MsgClaimOrderWorkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ClaimOrderWork not implemented")
+}
+func (*UnimplementedMsgServer) RegisterHeadNode(ctx context.Context, req *MsgRegisterHeadNode) (*MsgRegisterHeadNodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterHeadNode not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -485,6 +627,24 @@ func _Msg_ClaimOrderWork_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_RegisterHeadNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRegisterHeadNode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).RegisterHeadNode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/txlabs.blocklesschain.market.Msg/RegisterHeadNode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).RegisterHeadNode(ctx, req.(*MsgRegisterHeadNode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "txlabs.blocklesschain.market.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -500,6 +660,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ClaimOrderWork",
 			Handler:    _Msg_ClaimOrderWork_Handler,
+		},
+		{
+			MethodName: "RegisterHeadNode",
+			Handler:    _Msg_RegisterHeadNode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -600,6 +764,13 @@ func (m *MsgSubmitCompletedOrder) MarshalToSizedBuffer(dAtA []byte) (int, error)
 	_ = i
 	var l int
 	_ = l
+	if len(m.ResponseId) > 0 {
+		i -= len(m.ResponseId)
+		copy(dAtA[i:], m.ResponseId)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ResponseId)))
+		i--
+		dAtA[i] = 0x22
+	}
 	if len(m.FuelUsed) > 0 {
 		i -= len(m.FuelUsed)
 		copy(dAtA[i:], m.FuelUsed)
@@ -707,6 +878,87 @@ func (m *MsgClaimOrderWorkResponse) MarshalToSizedBuffer(dAtA []byte) (int, erro
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgRegisterHeadNode) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgRegisterHeadNode) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgRegisterHeadNode) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.NodeOwner) > 0 {
+		i -= len(m.NodeOwner)
+		copy(dAtA[i:], m.NodeOwner)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.NodeOwner)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.NodeIp) > 0 {
+		i -= len(m.NodeIp)
+		copy(dAtA[i:], m.NodeIp)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.NodeIp)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.NodePort) > 0 {
+		i -= len(m.NodePort)
+		copy(dAtA[i:], m.NodePort)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.NodePort)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.NodeId) > 0 {
+		i -= len(m.NodeId)
+		copy(dAtA[i:], m.NodeId)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.NodeId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgRegisterHeadNodeResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgRegisterHeadNodeResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgRegisterHeadNodeResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -770,6 +1022,10 @@ func (m *MsgSubmitCompletedOrder) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
+	l = len(m.ResponseId)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	return n
 }
 
@@ -800,6 +1056,44 @@ func (m *MsgClaimOrderWork) Size() (n int) {
 }
 
 func (m *MsgClaimOrderWorkResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgRegisterHeadNode) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.NodeId)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.NodePort)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.NodeIp)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.NodeOwner)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgRegisterHeadNodeResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1167,6 +1461,38 @@ func (m *MsgSubmitCompletedOrder) Unmarshal(dAtA []byte) error {
 			}
 			m.FuelUsed = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ResponseId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ResponseId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])
@@ -1379,6 +1705,266 @@ func (m *MsgClaimOrderWorkResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgClaimOrderWorkResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgRegisterHeadNode) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgRegisterHeadNode: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgRegisterHeadNode: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NodeId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.NodeId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NodePort", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.NodePort = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NodeIp", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.NodeIp = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NodeOwner", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.NodeOwner = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgRegisterHeadNodeResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgRegisterHeadNodeResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgRegisterHeadNodeResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

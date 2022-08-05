@@ -5,7 +5,6 @@ export const protobufPackage = "txlabs.blocklesschain.market";
 
 export interface ClaimedOrder {
   index: string;
-  orderIndex: string;
   claimedBy: string;
   claimedHeight: string;
   date: string;
@@ -13,7 +12,6 @@ export interface ClaimedOrder {
 
 const baseClaimedOrder: object = {
   index: "",
-  orderIndex: "",
   claimedBy: "",
   claimedHeight: "",
   date: "",
@@ -23,9 +21,6 @@ export const ClaimedOrder = {
   encode(message: ClaimedOrder, writer: Writer = Writer.create()): Writer {
     if (message.index !== "") {
       writer.uint32(10).string(message.index);
-    }
-    if (message.orderIndex !== "") {
-      writer.uint32(18).string(message.orderIndex);
     }
     if (message.claimedBy !== "") {
       writer.uint32(26).string(message.claimedBy);
@@ -48,9 +43,6 @@ export const ClaimedOrder = {
       switch (tag >>> 3) {
         case 1:
           message.index = reader.string();
-          break;
-        case 2:
-          message.orderIndex = reader.string();
           break;
         case 3:
           message.claimedBy = reader.string();
@@ -76,11 +68,6 @@ export const ClaimedOrder = {
     } else {
       message.index = "";
     }
-    if (object.orderIndex !== undefined && object.orderIndex !== null) {
-      message.orderIndex = String(object.orderIndex);
-    } else {
-      message.orderIndex = "";
-    }
     if (object.claimedBy !== undefined && object.claimedBy !== null) {
       message.claimedBy = String(object.claimedBy);
     } else {
@@ -102,7 +89,6 @@ export const ClaimedOrder = {
   toJSON(message: ClaimedOrder): unknown {
     const obj: any = {};
     message.index !== undefined && (obj.index = message.index);
-    message.orderIndex !== undefined && (obj.orderIndex = message.orderIndex);
     message.claimedBy !== undefined && (obj.claimedBy = message.claimedBy);
     message.claimedHeight !== undefined &&
       (obj.claimedHeight = message.claimedHeight);
@@ -116,11 +102,6 @@ export const ClaimedOrder = {
       message.index = object.index;
     } else {
       message.index = "";
-    }
-    if (object.orderIndex !== undefined && object.orderIndex !== null) {
-      message.orderIndex = object.orderIndex;
-    } else {
-      message.orderIndex = "";
     }
     if (object.claimedBy !== undefined && object.claimedBy !== null) {
       message.claimedBy = object.claimedBy;

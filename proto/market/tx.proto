@@ -10,6 +10,7 @@ service Msg {
       rpc SubmitOrder(MsgSubmitOrder) returns (MsgSubmitOrderResponse);
   rpc SubmitCompletedOrder(MsgSubmitCompletedOrder) returns (MsgSubmitCompletedOrderResponse);
   rpc ClaimOrderWork(MsgClaimOrderWork) returns (MsgClaimOrderWorkResponse);
+  rpc RegisterHeadNode(MsgRegisterHeadNode) returns (MsgRegisterHeadNodeResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -27,6 +28,7 @@ message MsgSubmitCompletedOrder {
   string creator = 1;
   string orderIndex = 2;
   string fuelUsed = 3;
+  string responseId = 4;
 }
 
 message MsgSubmitCompletedOrderResponse {
@@ -38,6 +40,17 @@ message MsgClaimOrderWork {
 }
 
 message MsgClaimOrderWorkResponse {
+}
+
+message MsgRegisterHeadNode {
+  string creator = 1;
+  string nodeId = 2;
+  string nodePort = 3;
+  string nodeIp = 4;
+  string nodeOwner = 5;
+}
+
+message MsgRegisterHeadNodeResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

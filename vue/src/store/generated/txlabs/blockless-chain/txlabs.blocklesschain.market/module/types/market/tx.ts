@@ -17,6 +17,7 @@ export interface MsgSubmitCompletedOrder {
   creator: string;
   orderIndex: string;
   fuelUsed: string;
+  responseId: string;
 }
 
 export interface MsgSubmitCompletedOrderResponse {}
@@ -27,6 +28,16 @@ export interface MsgClaimOrderWork {
 }
 
 export interface MsgClaimOrderWorkResponse {}
+
+export interface MsgRegisterHeadNode {
+  creator: string;
+  nodeId: string;
+  nodePort: string;
+  nodeIp: string;
+  nodeOwner: string;
+}
+
+export interface MsgRegisterHeadNodeResponse {}
 
 const baseMsgSubmitOrder: object = { creator: "", functionId: "", fuel: "" };
 
@@ -181,6 +192,7 @@ const baseMsgSubmitCompletedOrder: object = {
   creator: "",
   orderIndex: "",
   fuelUsed: "",
+  responseId: "",
 };
 
 export const MsgSubmitCompletedOrder = {
@@ -196,6 +208,9 @@ export const MsgSubmitCompletedOrder = {
     }
     if (message.fuelUsed !== "") {
       writer.uint32(26).string(message.fuelUsed);
+    }
+    if (message.responseId !== "") {
+      writer.uint32(34).string(message.responseId);
     }
     return writer;
   },
@@ -217,6 +232,9 @@ export const MsgSubmitCompletedOrder = {
           break;
         case 3:
           message.fuelUsed = reader.string();
+          break;
+        case 4:
+          message.responseId = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -245,6 +263,11 @@ export const MsgSubmitCompletedOrder = {
     } else {
       message.fuelUsed = "";
     }
+    if (object.responseId !== undefined && object.responseId !== null) {
+      message.responseId = String(object.responseId);
+    } else {
+      message.responseId = "";
+    }
     return message;
   },
 
@@ -253,6 +276,7 @@ export const MsgSubmitCompletedOrder = {
     message.creator !== undefined && (obj.creator = message.creator);
     message.orderIndex !== undefined && (obj.orderIndex = message.orderIndex);
     message.fuelUsed !== undefined && (obj.fuelUsed = message.fuelUsed);
+    message.responseId !== undefined && (obj.responseId = message.responseId);
     return obj;
   },
 
@@ -276,6 +300,11 @@ export const MsgSubmitCompletedOrder = {
       message.fuelUsed = object.fuelUsed;
     } else {
       message.fuelUsed = "";
+    }
+    if (object.responseId !== undefined && object.responseId !== null) {
+      message.responseId = object.responseId;
+    } else {
+      message.responseId = "";
     }
     return message;
   },
@@ -457,16 +486,203 @@ export const MsgClaimOrderWorkResponse = {
   },
 };
 
+const baseMsgRegisterHeadNode: object = {
+  creator: "",
+  nodeId: "",
+  nodePort: "",
+  nodeIp: "",
+  nodeOwner: "",
+};
+
+export const MsgRegisterHeadNode = {
+  encode(
+    message: MsgRegisterHeadNode,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.nodeId !== "") {
+      writer.uint32(18).string(message.nodeId);
+    }
+    if (message.nodePort !== "") {
+      writer.uint32(26).string(message.nodePort);
+    }
+    if (message.nodeIp !== "") {
+      writer.uint32(34).string(message.nodeIp);
+    }
+    if (message.nodeOwner !== "") {
+      writer.uint32(42).string(message.nodeOwner);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgRegisterHeadNode {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgRegisterHeadNode } as MsgRegisterHeadNode;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.nodeId = reader.string();
+          break;
+        case 3:
+          message.nodePort = reader.string();
+          break;
+        case 4:
+          message.nodeIp = reader.string();
+          break;
+        case 5:
+          message.nodeOwner = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgRegisterHeadNode {
+    const message = { ...baseMsgRegisterHeadNode } as MsgRegisterHeadNode;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.nodeId !== undefined && object.nodeId !== null) {
+      message.nodeId = String(object.nodeId);
+    } else {
+      message.nodeId = "";
+    }
+    if (object.nodePort !== undefined && object.nodePort !== null) {
+      message.nodePort = String(object.nodePort);
+    } else {
+      message.nodePort = "";
+    }
+    if (object.nodeIp !== undefined && object.nodeIp !== null) {
+      message.nodeIp = String(object.nodeIp);
+    } else {
+      message.nodeIp = "";
+    }
+    if (object.nodeOwner !== undefined && object.nodeOwner !== null) {
+      message.nodeOwner = String(object.nodeOwner);
+    } else {
+      message.nodeOwner = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgRegisterHeadNode): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.nodeId !== undefined && (obj.nodeId = message.nodeId);
+    message.nodePort !== undefined && (obj.nodePort = message.nodePort);
+    message.nodeIp !== undefined && (obj.nodeIp = message.nodeIp);
+    message.nodeOwner !== undefined && (obj.nodeOwner = message.nodeOwner);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgRegisterHeadNode>): MsgRegisterHeadNode {
+    const message = { ...baseMsgRegisterHeadNode } as MsgRegisterHeadNode;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.nodeId !== undefined && object.nodeId !== null) {
+      message.nodeId = object.nodeId;
+    } else {
+      message.nodeId = "";
+    }
+    if (object.nodePort !== undefined && object.nodePort !== null) {
+      message.nodePort = object.nodePort;
+    } else {
+      message.nodePort = "";
+    }
+    if (object.nodeIp !== undefined && object.nodeIp !== null) {
+      message.nodeIp = object.nodeIp;
+    } else {
+      message.nodeIp = "";
+    }
+    if (object.nodeOwner !== undefined && object.nodeOwner !== null) {
+      message.nodeOwner = object.nodeOwner;
+    } else {
+      message.nodeOwner = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgRegisterHeadNodeResponse: object = {};
+
+export const MsgRegisterHeadNodeResponse = {
+  encode(
+    _: MsgRegisterHeadNodeResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgRegisterHeadNodeResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgRegisterHeadNodeResponse,
+    } as MsgRegisterHeadNodeResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgRegisterHeadNodeResponse {
+    const message = {
+      ...baseMsgRegisterHeadNodeResponse,
+    } as MsgRegisterHeadNodeResponse;
+    return message;
+  },
+
+  toJSON(_: MsgRegisterHeadNodeResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgRegisterHeadNodeResponse>
+  ): MsgRegisterHeadNodeResponse {
+    const message = {
+      ...baseMsgRegisterHeadNodeResponse,
+    } as MsgRegisterHeadNodeResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   SubmitOrder(request: MsgSubmitOrder): Promise<MsgSubmitOrderResponse>;
   SubmitCompletedOrder(
     request: MsgSubmitCompletedOrder
   ): Promise<MsgSubmitCompletedOrderResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   ClaimOrderWork(
     request: MsgClaimOrderWork
   ): Promise<MsgClaimOrderWorkResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  RegisterHeadNode(
+    request: MsgRegisterHeadNode
+  ): Promise<MsgRegisterHeadNodeResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -511,6 +727,20 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgClaimOrderWorkResponse.decode(new Reader(data))
+    );
+  }
+
+  RegisterHeadNode(
+    request: MsgRegisterHeadNode
+  ): Promise<MsgRegisterHeadNodeResponse> {
+    const data = MsgRegisterHeadNode.encode(request).finish();
+    const promise = this.rpc.request(
+      "txlabs.blocklesschain.market.Msg",
+      "RegisterHeadNode",
+      data
+    );
+    return promise.then((data) =>
+      MsgRegisterHeadNodeResponse.decode(new Reader(data))
     );
   }
 }

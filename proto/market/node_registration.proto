@@ -1,0 +1,15 @@
+syntax = "proto3";
+package txlabs.blocklesschain.market;
+
+option go_package = "github.com/txlabs/blockless-chain/x/market/types";
+
+message NodeRegistration {
+  string index = 1; 
+  string nodeId = 2; 
+  string nodePort = 3; 
+  string nodeIp = 4; 
+  string nodeOwner = 5; 
+  string height = 6; 
+  string date = 7; 
+}
+

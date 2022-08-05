@@ -36,6 +36,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgClaimOrderWork int = 100
 
+	opWeightMsgRegisterHeadNode = "op_weight_msg_register_head_node"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgRegisterHeadNode int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -101,6 +105,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgClaimOrderWork,
 		marketsimulation.SimulateMsgClaimOrderWork(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgRegisterHeadNode int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgRegisterHeadNode, &weightMsgRegisterHeadNode, nil,
+		func(_ *rand.Rand) {
+			weightMsgRegisterHeadNode = defaultWeightMsgRegisterHeadNode
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgRegisterHeadNode,
+		marketsimulation.SimulateMsgRegisterHeadNode(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

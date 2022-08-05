@@ -10,6 +10,7 @@ export interface CompletedOrder {
   height: string;
   date: string;
   fuelUsed: string;
+  responseId: string;
 }
 
 const baseCompletedOrder: object = {
@@ -19,6 +20,7 @@ const baseCompletedOrder: object = {
   height: "",
   date: "",
   fuelUsed: "",
+  responseId: "",
 };
 
 export const CompletedOrder = {
@@ -40,6 +42,9 @@ export const CompletedOrder = {
     }
     if (message.fuelUsed !== "") {
       writer.uint32(50).string(message.fuelUsed);
+    }
+    if (message.responseId !== "") {
+      writer.uint32(58).string(message.responseId);
     }
     return writer;
   },
@@ -68,6 +73,9 @@ export const CompletedOrder = {
           break;
         case 6:
           message.fuelUsed = reader.string();
+          break;
+        case 7:
+          message.responseId = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -109,6 +117,11 @@ export const CompletedOrder = {
     } else {
       message.fuelUsed = "";
     }
+    if (object.responseId !== undefined && object.responseId !== null) {
+      message.responseId = String(object.responseId);
+    } else {
+      message.responseId = "";
+    }
     return message;
   },
 
@@ -121,6 +134,7 @@ export const CompletedOrder = {
     message.height !== undefined && (obj.height = message.height);
     message.date !== undefined && (obj.date = message.date);
     message.fuelUsed !== undefined && (obj.fuelUsed = message.fuelUsed);
+    message.responseId !== undefined && (obj.responseId = message.responseId);
     return obj;
   },
 
@@ -155,6 +169,11 @@ export const CompletedOrder = {
       message.fuelUsed = object.fuelUsed;
     } else {
       message.fuelUsed = "";
+    }
+    if (object.responseId !== undefined && object.responseId !== null) {
+      message.responseId = object.responseId;
+    } else {
+      message.responseId = "";
     }
     return message;
   },

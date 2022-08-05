@@ -673,6 +673,190 @@ func (m *QueryAllClaimedOrderResponse) GetPagination() *query.PageResponse {
 	return nil
 }
 
+type QueryGetNodeRegistrationRequest struct {
+	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+}
+
+func (m *QueryGetNodeRegistrationRequest) Reset()         { *m = QueryGetNodeRegistrationRequest{} }
+func (m *QueryGetNodeRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetNodeRegistrationRequest) ProtoMessage()    {}
+func (*QueryGetNodeRegistrationRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dc4839d34748ebb1, []int{14}
+}
+func (m *QueryGetNodeRegistrationRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetNodeRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetNodeRegistrationRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetNodeRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetNodeRegistrationRequest.Merge(m, src)
+}
+func (m *QueryGetNodeRegistrationRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetNodeRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetNodeRegistrationRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetNodeRegistrationRequest proto.InternalMessageInfo
+
+func (m *QueryGetNodeRegistrationRequest) GetIndex() string {
+	if m != nil {
+		return m.Index
+	}
+	return ""
+}
+
+type QueryGetNodeRegistrationResponse struct {
+	NodeRegistration NodeRegistration `protobuf:"bytes,1,opt,name=nodeRegistration,proto3" json:"nodeRegistration"`
+}
+
+func (m *QueryGetNodeRegistrationResponse) Reset()         { *m = QueryGetNodeRegistrationResponse{} }
+func (m *QueryGetNodeRegistrationResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetNodeRegistrationResponse) ProtoMessage()    {}
+func (*QueryGetNodeRegistrationResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dc4839d34748ebb1, []int{15}
+}
+func (m *QueryGetNodeRegistrationResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetNodeRegistrationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetNodeRegistrationResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetNodeRegistrationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetNodeRegistrationResponse.Merge(m, src)
+}
+func (m *QueryGetNodeRegistrationResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetNodeRegistrationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetNodeRegistrationResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetNodeRegistrationResponse proto.InternalMessageInfo
+
+func (m *QueryGetNodeRegistrationResponse) GetNodeRegistration() NodeRegistration {
+	if m != nil {
+		return m.NodeRegistration
+	}
+	return NodeRegistration{}
+}
+
+type QueryAllNodeRegistrationRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllNodeRegistrationRequest) Reset()         { *m = QueryAllNodeRegistrationRequest{} }
+func (m *QueryAllNodeRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllNodeRegistrationRequest) ProtoMessage()    {}
+func (*QueryAllNodeRegistrationRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dc4839d34748ebb1, []int{16}
+}
+func (m *QueryAllNodeRegistrationRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllNodeRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllNodeRegistrationRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllNodeRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllNodeRegistrationRequest.Merge(m, src)
+}
+func (m *QueryAllNodeRegistrationRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllNodeRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllNodeRegistrationRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllNodeRegistrationRequest proto.InternalMessageInfo
+
+func (m *QueryAllNodeRegistrationRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryAllNodeRegistrationResponse struct {
+	NodeRegistration []NodeRegistration  `protobuf:"bytes,1,rep,name=nodeRegistration,proto3" json:"nodeRegistration"`
+	Pagination       *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllNodeRegistrationResponse) Reset()         { *m = QueryAllNodeRegistrationResponse{} }
+func (m *QueryAllNodeRegistrationResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllNodeRegistrationResponse) ProtoMessage()    {}
+func (*QueryAllNodeRegistrationResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dc4839d34748ebb1, []int{17}
+}
+func (m *QueryAllNodeRegistrationResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllNodeRegistrationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllNodeRegistrationResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllNodeRegistrationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllNodeRegistrationResponse.Merge(m, src)
+}
+func (m *QueryAllNodeRegistrationResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllNodeRegistrationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllNodeRegistrationResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllNodeRegistrationResponse proto.InternalMessageInfo
+
+func (m *QueryAllNodeRegistrationResponse) GetNodeRegistration() []NodeRegistration {
+	if m != nil {
+		return m.NodeRegistration
+	}
+	return nil
+}
+
+func (m *QueryAllNodeRegistrationResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "txlabs.blocklesschain.market.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "txlabs.blocklesschain.market.QueryParamsResponse")
@@ -688,61 +872,74 @@ func init() {
 	proto.RegisterType((*QueryGetClaimedOrderResponse)(nil), "txlabs.blocklesschain.market.QueryGetClaimedOrderResponse")
 	proto.RegisterType((*QueryAllClaimedOrderRequest)(nil), "txlabs.blocklesschain.market.QueryAllClaimedOrderRequest")
 	proto.RegisterType((*QueryAllClaimedOrderResponse)(nil), "txlabs.blocklesschain.market.QueryAllClaimedOrderResponse")
+	proto.RegisterType((*QueryGetNodeRegistrationRequest)(nil), "txlabs.blocklesschain.market.QueryGetNodeRegistrationRequest")
+	proto.RegisterType((*QueryGetNodeRegistrationResponse)(nil), "txlabs.blocklesschain.market.QueryGetNodeRegistrationResponse")
+	proto.RegisterType((*QueryAllNodeRegistrationRequest)(nil), "txlabs.blocklesschain.market.QueryAllNodeRegistrationRequest")
+	proto.RegisterType((*QueryAllNodeRegistrationResponse)(nil), "txlabs.blocklesschain.market.QueryAllNodeRegistrationResponse")
 }
 
 func init() { proto.RegisterFile("market/query.proto", fileDescriptor_dc4839d34748ebb1) }
 
 var fileDescriptor_dc4839d34748ebb1 = []byte{
-	// 780 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x96, 0x4f, 0x4f, 0xd4, 0x40,
-	0x18, 0xc6, 0x77, 0xc0, 0xdd, 0xe8, 0x48, 0x30, 0x0e, 0x4b, 0x42, 0x56, 0xac, 0xa6, 0x22, 0x28,
-	0x59, 0x5a, 0xfe, 0x49, 0x44, 0x88, 0x66, 0x31, 0x81, 0xc4, 0x8b, 0xb8, 0xf1, 0xa0, 0x5c, 0x4c,
-	0xb7, 0x8c, 0xa5, 0xa1, 0xdb, 0x29, 0xdb, 0xc1, 0x40, 0xd4, 0x8b, 0x9f, 0x40, 0xe3, 0xd5, 0x0b,
-	0x17, 0xbf, 0x85, 0x5e, 0x8c, 0x86, 0xc4, 0x0b, 0x89, 0x17, 0x4f, 0xc6, 0x80, 0x1f, 0xc4, 0x74,
-	0xe6, 0xed, 0xda, 0x76, 0xff, 0x95, 0x75, 0x6f, 0xd0, 0x99, 0xe7, 0x7d, 0x7f, 0xcf, 0xfb, 0x74,
-	0x67, 0x8a, 0x49, 0xd5, 0xa8, 0x6d, 0x53, 0xae, 0xef, 0xec, 0xd2, 0xda, 0xbe, 0xe6, 0xd5, 0x18,
-	0x67, 0x64, 0x94, 0xef, 0x39, 0x46, 0xc5, 0xd7, 0x2a, 0x0e, 0x33, 0xb7, 0x1d, 0xea, 0xfb, 0xe6,
-	0x96, 0x61, 0xbb, 0x9a, 0xdc, 0x59, 0xc8, 0x5b, 0xcc, 0x62, 0x62, 0xa3, 0x1e, 0xfc, 0x25, 0x35,
-	0x85, 0x51, 0x8b, 0x31, 0xcb, 0xa1, 0xba, 0xe1, 0xd9, 0xba, 0xe1, 0xba, 0x8c, 0x1b, 0xdc, 0x66,
-	0xae, 0x0f, 0xab, 0x93, 0x26, 0xf3, 0xab, 0xcc, 0xd7, 0x2b, 0x86, 0x4f, 0x65, 0x2b, 0xfd, 0xc5,
-	0x4c, 0x85, 0x72, 0x63, 0x46, 0xf7, 0x0c, 0xcb, 0x76, 0xc5, 0x66, 0xd8, 0x3b, 0x04, 0x44, 0x9e,
-	0x51, 0x33, 0xaa, 0x61, 0x81, 0x10, 0x93, 0xd5, 0x36, 0x69, 0x2d, 0x6c, 0x09, 0xcf, 0x4c, 0x56,
-	0xf5, 0x1c, 0xca, 0xe9, 0xe6, 0xb3, 0xe8, 0x6a, 0x21, 0x5c, 0x75, 0x0c, 0xbb, 0x1a, 0x5f, 0x53,
-	0xf3, 0x98, 0x3c, 0x0a, 0x20, 0xd6, 0x45, 0x8b, 0x32, 0xdd, 0xd9, 0xa5, 0x3e, 0x57, 0x9f, 0xe2,
-	0xa1, 0xd8, 0x53, 0xdf, 0x63, 0xae, 0x4f, 0xc9, 0x0a, 0xce, 0x49, 0x94, 0x11, 0x74, 0x15, 0xdd,
-	0x38, 0x3f, 0x3b, 0xa6, 0xb5, 0x1b, 0x8f, 0x26, 0xd5, 0x2b, 0x67, 0x0e, 0x7f, 0x5d, 0xc9, 0x94,
-	0x41, 0xa9, 0x16, 0x71, 0x5e, 0x94, 0x5e, 0xa3, 0xfc, 0x61, 0xc0, 0x01, 0x2d, 0x49, 0x1e, 0x67,
-	0x6d, 0x77, 0x93, 0xee, 0x89, 0xd2, 0xe7, 0xca, 0xf2, 0x1f, 0xf5, 0x09, 0x1e, 0x4e, 0xec, 0x06,
-	0x94, 0x7b, 0x38, 0x2b, 0x6c, 0x00, 0xc9, 0xb5, 0xf6, 0x24, 0x42, 0x0b, 0x20, 0x52, 0xa7, 0x1e,
-	0x20, 0x00, 0x29, 0x39, 0x4e, 0x0c, 0xa4, 0x84, 0x73, 0xcf, 0x6d, 0x87, 0xd7, 0x4b, 0xdf, 0x4c,
-	0x51, 0x7a, 0x55, 0x08, 0xca, 0x20, 0x24, 0xab, 0x18, 0xff, 0xcb, 0x72, 0xa4, 0x4f, 0x94, 0x19,
-	0xd7, 0x64, 0xf0, 0x5a, 0x10, 0xbc, 0x26, 0xdf, 0x31, 0x08, 0x5e, 0x5b, 0x37, 0x2c, 0x0a, 0xed,
-	0xcb, 0x11, 0x65, 0xc0, 0x38, 0x9c, 0x60, 0x6c, 0xb4, 0xdf, 0xdf, 0x8d, 0x7d, 0xb2, 0xd6, 0x04,
-	0x71, 0xa2, 0x23, 0xa2, 0xec, 0x1e, 0x63, 0xbc, 0x85, 0x2f, 0x87, 0x09, 0xdd, 0x0f, 0xdf, 0xbe,
-	0x14, 0xc1, 0xbe, 0xc2, 0x4a, 0x2b, 0x19, 0x58, 0xdc, 0xc0, 0x83, 0x66, 0x6c, 0x05, 0xf2, 0x28,
-	0xb6, 0xf7, 0x1a, 0xaf, 0x06, 0xa6, 0x13, 0x95, 0x54, 0x0b, 0xa0, 0x4b, 0x8e, 0xd3, 0x1c, 0x3a,
-	0x9e, 0x20, 0xea, 0x3a, 0xc1, 0xaf, 0x08, 0x7c, 0x36, 0xe9, 0xd4, 0xc6, 0x67, 0x7f, 0x6f, 0x7c,
-	0xf6, 0x2e, 0xe5, 0x39, 0x7c, 0xa9, 0x1e, 0x97, 0x3c, 0x45, 0x52, 0x64, 0xcc, 0xf1, 0x68, 0x73,
-	0x11, 0x38, 0x7f, 0x8c, 0x07, 0xcc, 0xc8, 0x73, 0x18, 0xf3, 0x64, 0x07, 0xdf, 0x11, 0x05, 0xb8,
-	0x8e, 0x55, 0x51, 0x29, 0xa0, 0x06, 0x13, 0x6f, 0x82, 0xda, 0xab, 0x64, 0x3f, 0x21, 0x70, 0xd7,
-	0xd0, 0xa7, 0xa5, 0xbb, 0xfe, 0xff, 0x77, 0xd7, 0xb3, 0x44, 0x67, 0xdf, 0x61, 0x9c, 0x15, 0xfc,
-	0xe4, 0x03, 0xc2, 0x39, 0x79, 0x54, 0x93, 0xe9, 0xf6, 0x74, 0x8d, 0x37, 0x45, 0x61, 0xe6, 0x14,
-	0x0a, 0x49, 0xa1, 0x4e, 0xbd, 0xf9, 0xf1, 0xe7, 0x7d, 0xdf, 0x04, 0xb9, 0xae, 0x4b, 0xa9, 0x5e,
-	0x97, 0x4e, 0x09, 0xad, 0x1e, 0xbb, 0xf5, 0xc8, 0x47, 0x84, 0xb3, 0xd2, 0xfb, 0x6c, 0x8a, 0x5e,
-	0x89, 0x6b, 0xa5, 0x30, 0x77, 0x2a, 0x0d, 0x10, 0xce, 0x0b, 0x42, 0x8d, 0x14, 0x3b, 0x10, 0x8a,
-	0xa3, 0x54, 0x7f, 0x29, 0xde, 0xf6, 0xd7, 0xe4, 0x00, 0xe1, 0xb3, 0xa2, 0x4e, 0xc9, 0x71, 0x52,
-	0xb1, 0x26, 0x6e, 0x9e, 0x54, 0xac, 0xc9, 0x9b, 0x40, 0x2d, 0x0a, 0xd6, 0x71, 0x32, 0x96, 0x86,
-	0x95, 0x7c, 0x47, 0x78, 0x30, 0x7e, 0x72, 0x90, 0xa5, 0x74, 0x13, 0x6a, 0x7a, 0x4e, 0x16, 0x96,
-	0xbb, 0x13, 0x03, 0xfb, 0x5d, 0xc1, 0x7e, 0x9b, 0x2c, 0x74, 0x60, 0x4f, 0x7c, 0xd6, 0xd4, 0x27,
-	0xfe, 0x0d, 0xe1, 0x8b, 0xf1, 0xd2, 0xc1, 0xe8, 0x97, 0xd2, 0x8d, 0xb1, 0x7b, 0x43, 0x2d, 0xcf,
-	0x72, 0x75, 0x41, 0x18, 0x9a, 0x26, 0xda, 0xe9, 0x0c, 0x91, 0x2f, 0x08, 0x0f, 0x44, 0x7f, 0xfa,
-	0x64, 0x31, 0xe5, 0x5c, 0x1b, 0x0f, 0xb8, 0xc2, 0x9d, 0x6e, 0xa4, 0xc0, 0xbf, 0x2c, 0xf8, 0x17,
-	0xc8, 0x7c, 0x27, 0xfe, 0xe8, 0x97, 0x64, 0x3d, 0x8e, 0xcf, 0x08, 0x5f, 0x88, 0x96, 0x0d, 0xc2,
-	0x58, 0x4c, 0x39, 0xcf, 0x2e, 0x8d, 0xb4, 0x38, 0x7c, 0x53, 0xff, 0x82, 0x63, 0x46, 0x56, 0x1e,
-	0x1c, 0x1e, 0x2b, 0xe8, 0xe8, 0x58, 0x41, 0xbf, 0x8f, 0x15, 0xf4, 0xf6, 0x44, 0xc9, 0x1c, 0x9d,
-	0x28, 0x99, 0x9f, 0x27, 0x4a, 0x66, 0x63, 0xda, 0xb2, 0xf9, 0xd6, 0x6e, 0x45, 0x33, 0x59, 0xb5,
-	0x55, 0xc5, 0xbd, 0xb0, 0x26, 0xdf, 0xf7, 0xa8, 0x5f, 0xc9, 0x89, 0xef, 0xeb, 0xb9, 0xbf, 0x01,
-	0x00, 0x00, 0xff, 0xff, 0xdf, 0xf1, 0x1d, 0x99, 0x56, 0x0c, 0x00, 0x00,
+	// 926 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x97, 0x4f, 0x6f, 0xe3, 0x44,
+	0x18, 0xc6, 0x33, 0x0d, 0x89, 0x60, 0x28, 0xa5, 0x4c, 0x53, 0xa9, 0x32, 0xc5, 0xad, 0x4c, 0x69,
+	0xa1, 0x4a, 0xed, 0x34, 0x2d, 0xa5, 0xff, 0x21, 0x45, 0x6a, 0x25, 0x0e, 0x50, 0x22, 0x0e, 0xd0,
+	0x4b, 0x71, 0x92, 0xc1, 0xb5, 0xea, 0x78, 0x52, 0xdb, 0x45, 0xad, 0x80, 0x0b, 0xe2, 0x03, 0x20,
+	0x71, 0xe5, 0xd2, 0x0b, 0x9f, 0x81, 0x0b, 0x5c, 0x10, 0xa8, 0x12, 0xda, 0x55, 0xa5, 0x5e, 0xf6,
+	0xb4, 0x5a, 0xb5, 0xfb, 0x41, 0x56, 0x1e, 0xbf, 0xce, 0xda, 0x4e, 0xec, 0x38, 0x69, 0x6e, 0xad,
+	0x67, 0x9e, 0x77, 0x7e, 0xcf, 0xfb, 0x4c, 0x3c, 0x63, 0x4c, 0x9a, 0xaa, 0x75, 0x4a, 0x1d, 0xe5,
+	0xec, 0x9c, 0x5a, 0x97, 0x72, 0xcb, 0x62, 0x0e, 0x23, 0xd3, 0xce, 0x85, 0xa1, 0xd6, 0x6c, 0xb9,
+	0x66, 0xb0, 0xfa, 0xa9, 0x41, 0x6d, 0xbb, 0x7e, 0xa2, 0xea, 0xa6, 0xec, 0xcd, 0x14, 0x0a, 0x1a,
+	0xd3, 0x18, 0x9f, 0xa8, 0xb8, 0x7f, 0x79, 0x1a, 0x61, 0x5a, 0x63, 0x4c, 0x33, 0xa8, 0xa2, 0xb6,
+	0x74, 0x45, 0x35, 0x4d, 0xe6, 0xa8, 0x8e, 0xce, 0x4c, 0x1b, 0x46, 0x17, 0xeb, 0xcc, 0x6e, 0x32,
+	0x5b, 0xa9, 0xa9, 0x36, 0xf5, 0x96, 0x52, 0xbe, 0x5f, 0xae, 0x51, 0x47, 0x5d, 0x56, 0x5a, 0xaa,
+	0xa6, 0x9b, 0x7c, 0x32, 0xcc, 0x9d, 0x00, 0xa2, 0x96, 0x6a, 0xa9, 0x4d, 0xbf, 0x80, 0x8f, 0xc9,
+	0xac, 0x06, 0xb5, 0xfc, 0x25, 0xe1, 0x59, 0x9d, 0x35, 0x5b, 0x06, 0x75, 0x68, 0xe3, 0x38, 0x38,
+	0x2a, 0xf8, 0xa3, 0x86, 0xaa, 0x37, 0x23, 0x63, 0x22, 0x8c, 0x99, 0xac, 0x41, 0x8f, 0x2d, 0xaa,
+	0xe9, 0xb6, 0x63, 0x05, 0x10, 0xa4, 0x02, 0x26, 0x5f, 0xba, 0x90, 0x87, 0x1c, 0xa1, 0x4a, 0xcf,
+	0xce, 0xa9, 0xed, 0x48, 0xdf, 0xe0, 0x89, 0xd0, 0x53, 0xbb, 0xc5, 0x4c, 0x9b, 0x92, 0x3d, 0x9c,
+	0xf7, 0x50, 0xa7, 0xd0, 0x2c, 0x7a, 0xff, 0xf5, 0xf2, 0x9c, 0x9c, 0xd4, 0x3e, 0xd9, 0x53, 0xef,
+	0xbd, 0x72, 0xfd, 0x74, 0x26, 0x53, 0x05, 0xa5, 0x54, 0xc4, 0x05, 0x5e, 0xfa, 0x80, 0x3a, 0x5f,
+	0xb8, 0x9c, 0xb0, 0x24, 0x29, 0xe0, 0x9c, 0x6e, 0x36, 0xe8, 0x05, 0x2f, 0xfd, 0x5a, 0xd5, 0xfb,
+	0x47, 0xfa, 0x1a, 0x4f, 0x46, 0x66, 0x03, 0xca, 0xc7, 0x38, 0xc7, 0x6d, 0x02, 0xc9, 0xbb, 0xc9,
+	0x24, 0x5c, 0x0b, 0x20, 0x9e, 0x4e, 0xba, 0x42, 0x00, 0x52, 0x31, 0x8c, 0x10, 0x48, 0x05, 0xe7,
+	0xbf, 0xd3, 0x0d, 0xa7, 0x5d, 0xfa, 0x83, 0x14, 0xa5, 0xf7, 0xb9, 0xa0, 0x0a, 0x42, 0xb2, 0x8f,
+	0xf1, 0xcb, 0xac, 0xa7, 0x46, 0x78, 0x99, 0x79, 0xd9, 0xdb, 0x18, 0xb2, 0xbb, 0x31, 0x64, 0x6f,
+	0x0f, 0xc2, 0xc6, 0x90, 0x0f, 0x55, 0x8d, 0xc2, 0xf2, 0xd5, 0x80, 0xd2, 0x65, 0x9c, 0x8c, 0x30,
+	0x76, 0xda, 0xcf, 0x0e, 0x62, 0x9f, 0x1c, 0x74, 0x41, 0x5c, 0xe8, 0x89, 0xe8, 0xad, 0x1e, 0x62,
+	0xfc, 0x10, 0xbf, 0xe3, 0x27, 0xf4, 0xa9, 0xbf, 0x3b, 0x53, 0x04, 0xfb, 0x23, 0x16, 0xe3, 0x64,
+	0x60, 0xf1, 0x08, 0x8f, 0xd5, 0x43, 0x23, 0x90, 0x47, 0x31, 0xd9, 0x6b, 0xb8, 0x1a, 0x98, 0x8e,
+	0x54, 0x92, 0x34, 0x80, 0xae, 0x18, 0x46, 0x77, 0xe8, 0x70, 0x82, 0x68, 0xe0, 0x04, 0xff, 0x45,
+	0xe0, 0xb3, 0xcb, 0x4a, 0x09, 0x3e, 0xb3, 0xc3, 0xf1, 0x39, 0xbc, 0x94, 0x57, 0xf0, 0xdb, 0xed,
+	0xb8, 0xbc, 0xb7, 0x4c, 0x8a, 0x8c, 0x1d, 0x3c, 0xdd, 0x5d, 0x04, 0xce, 0xbf, 0xc2, 0xa3, 0xf5,
+	0xc0, 0x73, 0x68, 0xf3, 0x62, 0x0f, 0xdf, 0x01, 0x05, 0xb8, 0x0e, 0x55, 0x91, 0x28, 0xa0, 0xba,
+	0x1d, 0xef, 0x82, 0x3a, 0xac, 0x64, 0xff, 0x42, 0xe0, 0xae, 0x63, 0x9d, 0x58, 0x77, 0xd9, 0x87,
+	0xbb, 0x1b, 0x5e, 0xa2, 0x1f, 0xe1, 0x19, 0x3f, 0x9c, 0xcf, 0x59, 0x83, 0x56, 0x03, 0x47, 0x43,
+	0x72, 0xaa, 0xbf, 0x20, 0x3c, 0x1b, 0xaf, 0x04, 0xf3, 0xdf, 0xe2, 0x71, 0x33, 0x32, 0x06, 0xbd,
+	0x96, 0x93, 0x1b, 0x10, 0xad, 0x08, 0x4d, 0xe8, 0xa8, 0x26, 0xe9, 0xc0, 0x5f, 0x31, 0x8c, 0x38,
+	0xfe, 0x61, 0x45, 0xfd, 0xc8, 0x77, 0xdc, 0x75, 0xad, 0x44, 0xc7, 0xd9, 0xe1, 0x39, 0x1e, 0x5a,
+	0xf4, 0xe5, 0x3f, 0xdf, 0xc0, 0x39, 0xee, 0x87, 0xfc, 0x8e, 0x70, 0xde, 0x3b, 0xa5, 0x49, 0x29,
+	0x99, 0xb2, 0xf3, 0x92, 0x20, 0x2c, 0xf7, 0xa1, 0xf0, 0x28, 0xa4, 0xa5, 0x9f, 0x6f, 0x9f, 0xff,
+	0x36, 0xb2, 0x40, 0xde, 0x53, 0x3c, 0xa9, 0xd2, 0x96, 0x2e, 0x71, 0xad, 0x12, 0xba, 0x10, 0x91,
+	0x3f, 0x10, 0xce, 0x79, 0xdb, 0xbe, 0x9c, 0x62, 0xad, 0xc8, 0x8d, 0x42, 0x58, 0xe9, 0x4b, 0x03,
+	0x84, 0xab, 0x9c, 0x50, 0x26, 0xc5, 0x1e, 0x84, 0xfc, 0x14, 0x55, 0x7e, 0xe0, 0x3f, 0x89, 0x9f,
+	0xc8, 0x15, 0xc2, 0xaf, 0xf2, 0x3a, 0x15, 0xc3, 0x48, 0xc5, 0x1a, 0xb9, 0x74, 0xa4, 0x62, 0x8d,
+	0x5e, 0x02, 0xa4, 0x22, 0x67, 0x9d, 0x27, 0x73, 0x69, 0x58, 0xc9, 0xff, 0x08, 0x8f, 0x85, 0x0f,
+	0x0d, 0xb2, 0x95, 0xae, 0x43, 0x5d, 0x8f, 0x48, 0x61, 0x7b, 0x30, 0x31, 0xb0, 0xef, 0x72, 0xf6,
+	0x75, 0xb2, 0xd6, 0x83, 0x3d, 0x72, 0xe3, 0x6d, 0x77, 0xfc, 0x3f, 0x84, 0xdf, 0x0a, 0x97, 0x76,
+	0x5b, 0xbf, 0x95, 0xae, 0x8d, 0x83, 0x1b, 0x8a, 0x3d, 0xc6, 0xa5, 0x35, 0x6e, 0xa8, 0x44, 0xe4,
+	0xfe, 0x0c, 0x91, 0x7f, 0x10, 0x1e, 0x0d, 0xbe, 0xf5, 0xc9, 0x46, 0xca, 0xbe, 0x76, 0x9e, 0x6d,
+	0xc2, 0xe6, 0x20, 0x52, 0xe0, 0xdf, 0xe6, 0xfc, 0x6b, 0x64, 0xb5, 0x17, 0x7f, 0xf0, 0x23, 0xa3,
+	0x1d, 0xc7, 0xdf, 0x08, 0xbf, 0x19, 0x2c, 0xeb, 0x86, 0xb1, 0x91, 0xb2, 0x9f, 0x03, 0x1a, 0x89,
+	0x39, 0x77, 0x53, 0xff, 0x82, 0x43, 0x46, 0xc8, 0x2d, 0xc2, 0xe3, 0xd1, 0x37, 0x31, 0xd9, 0x49,
+	0xd7, 0xcf, 0x98, 0xf3, 0x47, 0xd8, 0x1d, 0x54, 0x0e, 0x4e, 0x3e, 0xe1, 0x4e, 0x36, 0xc9, 0x7a,
+	0x0f, 0x27, 0x1d, 0xdf, 0x76, 0xed, 0x58, 0x1e, 0x23, 0x3c, 0x11, 0x2d, 0xef, 0x46, 0xb3, 0x93,
+	0xae, 0xbf, 0x0f, 0x31, 0x96, 0x70, 0x56, 0x4a, 0xeb, 0xdc, 0x58, 0x99, 0x94, 0xfa, 0x35, 0xb6,
+	0xf7, 0xd9, 0xf5, 0x9d, 0x88, 0x6e, 0xee, 0x44, 0xf4, 0xec, 0x4e, 0x44, 0xbf, 0xde, 0x8b, 0x99,
+	0x9b, 0x7b, 0x31, 0xf3, 0xe4, 0x5e, 0xcc, 0x1c, 0x95, 0x34, 0xdd, 0x39, 0x39, 0xaf, 0xc9, 0x75,
+	0xd6, 0x8c, 0xab, 0x7a, 0xe1, 0xd7, 0x75, 0x2e, 0x5b, 0xd4, 0xae, 0xe5, 0xf9, 0x17, 0xf0, 0xca,
+	0x8b, 0x00, 0x00, 0x00, 0xff, 0xff, 0x51, 0x3f, 0x25, 0x12, 0x18, 0x10, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -771,6 +968,10 @@ type QueryClient interface {
 	ClaimedOrder(ctx context.Context, in *QueryGetClaimedOrderRequest, opts ...grpc.CallOption) (*QueryGetClaimedOrderResponse, error)
 	// Queries a list of ClaimedOrder items.
 	ClaimedOrderAll(ctx context.Context, in *QueryAllClaimedOrderRequest, opts ...grpc.CallOption) (*QueryAllClaimedOrderResponse, error)
+	// Queries a NodeRegistration by index.
+	NodeRegistration(ctx context.Context, in *QueryGetNodeRegistrationRequest, opts ...grpc.CallOption) (*QueryGetNodeRegistrationResponse, error)
+	// Queries a list of NodeRegistration items.
+	NodeRegistrationAll(ctx context.Context, in *QueryAllNodeRegistrationRequest, opts ...grpc.CallOption) (*QueryAllNodeRegistrationResponse, error)
 }
 
 type queryClient struct {
@@ -844,6 +1045,24 @@ func (c *queryClient) ClaimedOrderAll(ctx context.Context, in *QueryAllClaimedOr
 	return out, nil
 }
 
+func (c *queryClient) NodeRegistration(ctx context.Context, in *QueryGetNodeRegistrationRequest, opts ...grpc.CallOption) (*QueryGetNodeRegistrationResponse, error) {
+	out := new(QueryGetNodeRegistrationResponse)
+	err := c.cc.Invoke(ctx, "/txlabs.blocklesschain.market.Query/NodeRegistration", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) NodeRegistrationAll(ctx context.Context, in *QueryAllNodeRegistrationRequest, opts ...grpc.CallOption) (*QueryAllNodeRegistrationResponse, error) {
+	out := new(QueryAllNodeRegistrationResponse)
+	err := c.cc.Invoke(ctx, "/txlabs.blocklesschain.market.Query/NodeRegistrationAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
@@ -860,6 +1079,10 @@ type QueryServer interface {
 	ClaimedOrder(context.Context, *QueryGetClaimedOrderRequest) (*QueryGetClaimedOrderResponse, error)
 	// Queries a list of ClaimedOrder items.
 	ClaimedOrderAll(context.Context, *QueryAllClaimedOrderRequest) (*QueryAllClaimedOrderResponse, error)
+	// Queries a NodeRegistration by index.
+	NodeRegistration(context.Context, *QueryGetNodeRegistrationRequest) (*QueryGetNodeRegistrationResponse, error)
+	// Queries a list of NodeRegistration items.
+	NodeRegistrationAll(context.Context, *QueryAllNodeRegistrationRequest) (*QueryAllNodeRegistrationResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -886,6 +1109,12 @@ func (*UnimplementedQueryServer) ClaimedOrder(ctx context.Context, req *QueryGet
 }
 func (*UnimplementedQueryServer) ClaimedOrderAll(ctx context.Context, req *QueryAllClaimedOrderRequest) (*QueryAllClaimedOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ClaimedOrderAll not implemented")
+}
+func (*UnimplementedQueryServer) NodeRegistration(ctx context.Context, req *QueryGetNodeRegistrationRequest) (*QueryGetNodeRegistrationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodeRegistration not implemented")
+}
+func (*UnimplementedQueryServer) NodeRegistrationAll(ctx context.Context, req *QueryAllNodeRegistrationRequest) (*QueryAllNodeRegistrationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodeRegistrationAll not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -1018,6 +1247,42 @@ func _Query_ClaimedOrderAll_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_NodeRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetNodeRegistrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).NodeRegistration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/txlabs.blocklesschain.market.Query/NodeRegistration",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).NodeRegistration(ctx, req.(*QueryGetNodeRegistrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_NodeRegistrationAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllNodeRegistrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).NodeRegistrationAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/txlabs.blocklesschain.market.Query/NodeRegistrationAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).NodeRegistrationAll(ctx, req.(*QueryAllNodeRegistrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "txlabs.blocklesschain.market.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -1049,6 +1314,14 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ClaimedOrderAll",
 			Handler:    _Query_ClaimedOrderAll_Handler,
+		},
+		{
+			MethodName: "NodeRegistration",
+			Handler:    _Query_NodeRegistration_Handler,
+		},
+		{
+			MethodName: "NodeRegistrationAll",
+			Handler:    _Query_NodeRegistrationAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1564,6 +1837,153 @@ func (m *QueryAllClaimedOrderResponse) MarshalToSizedBuffer(dAtA []byte) (int, e
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryGetNodeRegistrationRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetNodeRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetNodeRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Index) > 0 {
+		i -= len(m.Index)
+		copy(dAtA[i:], m.Index)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Index)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetNodeRegistrationResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetNodeRegistrationResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetNodeRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.NodeRegistration.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllNodeRegistrationRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllNodeRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllNodeRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllNodeRegistrationResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllNodeRegistrationResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllNodeRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.NodeRegistration) > 0 {
+		for iNdEx := len(m.NodeRegistration) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NodeRegistration[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -1756,6 +2176,62 @@ func (m *QueryAllClaimedOrderResponse) Size() (n int) {
 	_ = l
 	if len(m.ClaimedOrder) > 0 {
 		for _, e := range m.ClaimedOrder {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetNodeRegistrationRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Index)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetNodeRegistrationResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.NodeRegistration.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryAllNodeRegistrationRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllNodeRegistrationResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.NodeRegistration) > 0 {
+		for _, e := range m.NodeRegistration {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
@@ -2995,6 +3471,377 @@ func (m *QueryAllClaimedOrderResponse) Unmarshal(dAtA []byte) error {
 			}
 			m.ClaimedOrder = append(m.ClaimedOrder, ClaimedOrder{})
 			if err := m.ClaimedOrder[len(m.ClaimedOrder)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetNodeRegistrationRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetNodeRegistrationRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetNodeRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Index = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetNodeRegistrationResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetNodeRegistrationResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetNodeRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NodeRegistration", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.NodeRegistration.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllNodeRegistrationRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllNodeRegistrationRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllNodeRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllNodeRegistrationResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllNodeRegistrationResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllNodeRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NodeRegistration", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.NodeRegistration = append(m.NodeRegistration, NodeRegistration{})
+			if err := m.NodeRegistration[len(m.NodeRegistration)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

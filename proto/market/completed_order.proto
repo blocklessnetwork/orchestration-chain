@@ -10,5 +10,6 @@ message CompletedOrder {
   string height = 4; 
   string date = 5; 
   string fuelUsed = 6; 
+  string responseId = 7;
 }
 

@@ -8,6 +8,7 @@ import {
 } from "../cosmos/base/query/v1beta1/pagination";
 import { CompletedOrder } from "../market/completed_order";
 import { ClaimedOrder } from "../market/claimed_order";
+import { NodeRegistration } from "../market/node_registration";
 
 export const protobufPackage = "txlabs.blocklesschain.market";
 
@@ -69,6 +70,23 @@ export interface QueryAllClaimedOrderRequest {
 
 export interface QueryAllClaimedOrderResponse {
   claimedOrder: ClaimedOrder[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetNodeRegistrationRequest {
+  index: string;
+}
+
+export interface QueryGetNodeRegistrationResponse {
+  nodeRegistration: NodeRegistration | undefined;
+}
+
+export interface QueryAllNodeRegistrationRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllNodeRegistrationResponse {
+  nodeRegistration: NodeRegistration[];
   pagination: PageResponse | undefined;
 }
 
@@ -1102,6 +1120,344 @@ export const QueryAllClaimedOrderResponse = {
   },
 };
 
+const baseQueryGetNodeRegistrationRequest: object = { index: "" };
+
+export const QueryGetNodeRegistrationRequest = {
+  encode(
+    message: QueryGetNodeRegistrationRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetNodeRegistrationRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetNodeRegistrationRequest,
+    } as QueryGetNodeRegistrationRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetNodeRegistrationRequest {
+    const message = {
+      ...baseQueryGetNodeRegistrationRequest,
+    } as QueryGetNodeRegistrationRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetNodeRegistrationRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetNodeRegistrationRequest>
+  ): QueryGetNodeRegistrationRequest {
+    const message = {
+      ...baseQueryGetNodeRegistrationRequest,
+    } as QueryGetNodeRegistrationRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetNodeRegistrationResponse: object = {};
+
+export const QueryGetNodeRegistrationResponse = {
+  encode(
+    message: QueryGetNodeRegistrationResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.nodeRegistration !== undefined) {
+      NodeRegistration.encode(
+        message.nodeRegistration,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetNodeRegistrationResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetNodeRegistrationResponse,
+    } as QueryGetNodeRegistrationResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.nodeRegistration = NodeRegistration.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetNodeRegistrationResponse {
+    const message = {
+      ...baseQueryGetNodeRegistrationResponse,
+    } as QueryGetNodeRegistrationResponse;
+    if (
+      object.nodeRegistration !== undefined &&
+      object.nodeRegistration !== null
+    ) {
+      message.nodeRegistration = NodeRegistration.fromJSON(
+        object.nodeRegistration
+      );
+    } else {
+      message.nodeRegistration = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetNodeRegistrationResponse): unknown {
+    const obj: any = {};
+    message.nodeRegistration !== undefined &&
+      (obj.nodeRegistration = message.nodeRegistration
+        ? NodeRegistration.toJSON(message.nodeRegistration)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetNodeRegistrationResponse>
+  ): QueryGetNodeRegistrationResponse {
+    const message = {
+      ...baseQueryGetNodeRegistrationResponse,
+    } as QueryGetNodeRegistrationResponse;
+    if (
+      object.nodeRegistration !== undefined &&
+      object.nodeRegistration !== null
+    ) {
+      message.nodeRegistration = NodeRegistration.fromPartial(
+        object.nodeRegistration
+      );
+    } else {
+      message.nodeRegistration = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllNodeRegistrationRequest: object = {};
+
+export const QueryAllNodeRegistrationRequest = {
+  encode(
+    message: QueryAllNodeRegistrationRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllNodeRegistrationRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllNodeRegistrationRequest,
+    } as QueryAllNodeRegistrationRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllNodeRegistrationRequest {
+    const message = {
+      ...baseQueryAllNodeRegistrationRequest,
+    } as QueryAllNodeRegistrationRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllNodeRegistrationRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllNodeRegistrationRequest>
+  ): QueryAllNodeRegistrationRequest {
+    const message = {
+      ...baseQueryAllNodeRegistrationRequest,
+    } as QueryAllNodeRegistrationRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllNodeRegistrationResponse: object = {};
+
+export const QueryAllNodeRegistrationResponse = {
+  encode(
+    message: QueryAllNodeRegistrationResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.nodeRegistration) {
+      NodeRegistration.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllNodeRegistrationResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllNodeRegistrationResponse,
+    } as QueryAllNodeRegistrationResponse;
+    message.nodeRegistration = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.nodeRegistration.push(
+            NodeRegistration.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllNodeRegistrationResponse {
+    const message = {
+      ...baseQueryAllNodeRegistrationResponse,
+    } as QueryAllNodeRegistrationResponse;
+    message.nodeRegistration = [];
+    if (
+      object.nodeRegistration !== undefined &&
+      object.nodeRegistration !== null
+    ) {
+      for (const e of object.nodeRegistration) {
+        message.nodeRegistration.push(NodeRegistration.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllNodeRegistrationResponse): unknown {
+    const obj: any = {};
+    if (message.nodeRegistration) {
+      obj.nodeRegistration = message.nodeRegistration.map((e) =>
+        e ? NodeRegistration.toJSON(e) : undefined
+      );
+    } else {
+      obj.nodeRegistration = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllNodeRegistrationResponse>
+  ): QueryAllNodeRegistrationResponse {
+    const message = {
+      ...baseQueryAllNodeRegistrationResponse,
+    } as QueryAllNodeRegistrationResponse;
+    message.nodeRegistration = [];
+    if (
+      object.nodeRegistration !== undefined &&
+      object.nodeRegistration !== null
+    ) {
+      for (const e of object.nodeRegistration) {
+        message.nodeRegistration.push(NodeRegistration.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1126,6 +1482,14 @@ export interface Query {
   ClaimedOrderAll(
     request: QueryAllClaimedOrderRequest
   ): Promise<QueryAllClaimedOrderResponse>;
+  /** Queries a NodeRegistration by index. */
+  NodeRegistration(
+    request: QueryGetNodeRegistrationRequest
+  ): Promise<QueryGetNodeRegistrationResponse>;
+  /** Queries a list of NodeRegistration items. */
+  NodeRegistrationAll(
+    request: QueryAllNodeRegistrationRequest
+  ): Promise<QueryAllNodeRegistrationResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1220,6 +1584,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllClaimedOrderResponse.decode(new Reader(data))
+    );
+  }
+
+  NodeRegistration(
+    request: QueryGetNodeRegistrationRequest
+  ): Promise<QueryGetNodeRegistrationResponse> {
+    const data = QueryGetNodeRegistrationRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "txlabs.blocklesschain.market.Query",
+      "NodeRegistration",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetNodeRegistrationResponse.decode(new Reader(data))
+    );
+  }
+
+  NodeRegistrationAll(
+    request: QueryAllNodeRegistrationRequest
+  ): Promise<QueryAllNodeRegistrationResponse> {
+    const data = QueryAllNodeRegistrationRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "txlabs.blocklesschain.market.Query",
+      "NodeRegistrationAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllNodeRegistrationResponse.decode(new Reader(data))
     );
   }
 }

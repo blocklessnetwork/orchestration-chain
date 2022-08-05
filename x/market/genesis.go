@@ -21,6 +21,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.ClaimedOrderList {
 		k.SetClaimedOrder(ctx, elem)
 	}
+	// Set all the nodeRegistration
+	for _, elem := range genState.NodeRegistrationList {
+		k.SetNodeRegistration(ctx, elem)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
 }
@@ -33,6 +37,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.OrderList = k.GetAllOrder(ctx)
 	genesis.CompletedOrderList = k.GetAllCompletedOrder(ctx)
 	genesis.ClaimedOrderList = k.GetAllClaimedOrder(ctx)
+	genesis.NodeRegistrationList = k.GetAllNodeRegistration(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

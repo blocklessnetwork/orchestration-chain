@@ -11,6 +11,7 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgSubmitOrder{}, "market/SubmitOrder", nil)
 	cdc.RegisterConcrete(&MsgSubmitCompletedOrder{}, "market/SubmitCompletedOrder", nil)
 	cdc.RegisterConcrete(&MsgClaimOrderWork{}, "market/ClaimOrderWork", nil)
+	cdc.RegisterConcrete(&MsgRegisterHeadNode{}, "market/RegisterHeadNode", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -23,6 +24,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgClaimOrderWork{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgRegisterHeadNode{},
 	)
 	// this line is used by starport scaffolding # 3
 

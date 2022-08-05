@@ -46,6 +46,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
+				NodeRegistrationList: []types.NodeRegistration{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -82,6 +90,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated claimedOrder",
 			genState: &types.GenesisState{
 				ClaimedOrderList: []types.ClaimedOrder{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated nodeRegistration",
+			genState: &types.GenesisState{
+				NodeRegistrationList: []types.NodeRegistration{
 					{
 						Index: "0",
 					},

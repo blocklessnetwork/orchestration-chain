@@ -8,6 +8,7 @@ import "market/params.proto";
 import "market/order.proto";
 import "market/completed_order.proto";
 import "market/claimed_order.proto";
+import "market/node_registration.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/txlabs/blockless-chain/x/market/types";
@@ -46,6 +47,16 @@ service Query {
 	// Queries a list of ClaimedOrder items.
 	rpc ClaimedOrderAll(QueryAllClaimedOrderRequest) returns (QueryAllClaimedOrderResponse) {
 		option (google.api.http).get = "/txlabs/blockless-chain/market/claimed_order";
+	}
+
+// Queries a NodeRegistration by index.
+	rpc NodeRegistration(QueryGetNodeRegistrationRequest) returns (QueryGetNodeRegistrationResponse) {
+		option (google.api.http).get = "/txlabs/blockless-chain/market/node_registration/{index}";
+	}
+
+	// Queries a list of NodeRegistration items.
+	rpc NodeRegistrationAll(QueryAllNodeRegistrationRequest) returns (QueryAllNodeRegistrationResponse) {
+		option (google.api.http).get = "/txlabs/blockless-chain/market/node_registration";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -111,6 +122,24 @@ message QueryAllClaimedOrderRequest {
 
 message QueryAllClaimedOrderResponse {
 	repeated ClaimedOrder claimedOrder = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetNodeRegistrationRequest {
+	  string index = 1;
+
+}
+
+message QueryGetNodeRegistrationResponse {
+	NodeRegistration nodeRegistration = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllNodeRegistrationRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllNodeRegistrationResponse {
+	repeated NodeRegistration nodeRegistration = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

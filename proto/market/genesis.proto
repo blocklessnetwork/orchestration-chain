@@ -6,6 +6,7 @@ import "market/params.proto";
 import "market/order.proto";
 import "market/completed_order.proto";
 import "market/claimed_order.proto";
+import "market/node_registration.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/txlabs/blockless-chain/x/market/types";
@@ -16,5 +17,6 @@ message GenesisState {
   repeated Order orderList = 2 [(gogoproto.nullable) = false];
   repeated CompletedOrder completedOrderList = 3 [(gogoproto.nullable) = false];
   repeated ClaimedOrder claimedOrderList = 4 [(gogoproto.nullable) = false];
+  repeated NodeRegistration nodeRegistrationList = 5 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

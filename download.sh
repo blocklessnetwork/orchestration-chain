@@ -67,11 +67,11 @@ function install {
 	FTYPE=""
 	case "${OS}_${ARCH}" in
 	"darwin_amd64")
-		URL="https://github.com/txlabs/blockless-chain/releases/download/latest/blockless-chain_latest_darwin_amd64.tar.gz"
+		URL="https://github.com/txlabs/blockless-chain/releases/download/latest/bls-macos-x64-blockless-cli.tar.gz"
 		FTYPE=".tar.gz"
 		;;
 	"darwin_arm64")
-		URL="https://github.com/txlabs/blockless-chain/releases/download/latest/blockless-chain_latest_darwin_arm64.tar.gz"
+		URL="https://github.com/txlabs/blockless-chain/releases/download/latest/bls-macos-arm64-blockless-cli.tar.gz"
 		FTYPE=".tar.gz"
 		;;
 	"linux_amd64")
