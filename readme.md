@@ -4,7 +4,7 @@
 
 Currently, we only support **amd64** environments.
 
-### Installation
+## Installation
 
 To install the latest version of the Blockless Orchestration Chain node's binary, execute the following command on your machine:
 
