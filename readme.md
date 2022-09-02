@@ -1,16 +1,18 @@
-# blocklesschain
+# Blockless Orchestration Chain
 
-**blocklesschain** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli). It's current support is limited to **amd64** environments.
+**Blockless Orchestration Chain** is a Cosmos-based blockchain designed for handling the Blocless network's dynamic payload deployment task. 
 
-## Get started
+Currently, we only support **amd64** environments.
+
+## Getting started
+
+Using `serve` command to install dependencies, build, initialize, and start your Blockless Orchestration Chain in development environment.
 
 ```
 ignite chain serve
 ```
 
-`serve` command installs dependencies, builds, initializes, and starts your blockchain in development.
-
-### Configure
+### Configuration
 
 Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
 
@@ -26,7 +28,7 @@ npm run serve
 
 The frontend app is built using the `@starport/vue` and `@starport/vuex` packages. For details, see the [monorepo for Ignite front-end development](https://github.com/ignite-hq/web).
 
-### Install
+### Installation
 
 To install the latest version of your blockchain node's binary, execute the following command on your machine:
 
