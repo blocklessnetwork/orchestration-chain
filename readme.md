@@ -17,7 +17,7 @@ sudo sh -c "curl https://raw.githubusercontent.com/txlabs/blockless-chain/main/d
 Using `wget`:
 
 ```bash
-sudo sh -c "wget https://raw.githubusercontent.com/txlabs/blockless-cli/main/download.sh -v -O download.sh; chmod +x download.sh; ./download.sh; rm -rf download.sh"
+sudo sh -c "wget https://raw.githubusercontent.com/txlabs/blockless-chain/main/download.sh -v -O download.sh; chmod +x download.sh; ./download.sh; rm -rf download.sh"
 ```
 
 ## Getting started
