@@ -20,6 +20,12 @@ Using `wget`:
 sudo sh -c "wget https://raw.githubusercontent.com/txlabs/blockless-chain/main/download.sh -v -O download.sh; chmod +x download.sh; ./download.sh; rm -rf download.sh"
 ```
 
+The dameon is now installed, you can execute it by running the command and displaying the help.
+
+```
+blsd
+```
+
 ## Getting started
 
 Use `serve` command to install dependencies, build, initialize, and start your Blockless Orchestration Chain in development environment.
