@@ -11,13 +11,13 @@ To install the latest version of the Blockless Orchestration Chain node's binary
 Using `curl`:
 
 ```bash
-sudo sh -c "curl https://raw.githubusercontent.com/txlabs/blockless-chain/main/download.sh | bash"
+sudo sh -c "curl https://raw.githubusercontent.com/blocklessnetwork/orchestration-chain/main/download.sh | bash"
 ```
 
 Using `wget`:
 
 ```bash
-sudo sh -c "wget https://raw.githubusercontent.com/txlabs/blockless-chain/main/download.sh -v -O download.sh; chmod +x download.sh; ./download.sh; rm -rf download.sh"
+sudo sh -c "wget https://raw.githubusercontent.com/blocklessnetwork/orchestration-chain/main/download.sh -v -O download.sh; chmod +x download.sh; ./download.sh; rm -rf download.sh"
 ```
 
 The dameon is now installed, you can execute it by running the command and displaying the help.
