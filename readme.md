@@ -1,6 +1,6 @@
 # Blockless Orchestration Chain
 
-**Blockless Orchestration Chain** is a Cosmos-based blockchain designed for handling the Blocless network's dynamic payload deployment task. 
+**Blockless Orchestration Chain** is a Cosmos-based blockchain designed for handling the Blockless network's dynamic payload deployment task. 
 
 Currently, we only support **amd64** environments.
 
