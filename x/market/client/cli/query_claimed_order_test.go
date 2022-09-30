@@ -12,10 +12,10 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/txlabs/blockless-chain/testutil/network"
-	"github.com/txlabs/blockless-chain/testutil/nullify"
-	"github.com/txlabs/blockless-chain/x/market/client/cli"
-	"github.com/txlabs/blockless-chain/x/market/types"
+	"github.com/blocklessnetwork/orchestration-chain/testutil/network"
+	"github.com/blocklessnetwork/orchestration-chain/testutil/nullify"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/client/cli"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 )
 
 // Prevent strconv unused error
