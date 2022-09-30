@@ -3,11 +3,11 @@ package market_test
 import (
 	"testing"
 
+	keepertest "github.com/blocklessnetwork/orchestration-chain/testutil/keeper"
+	"github.com/blocklessnetwork/orchestration-chain/testutil/nullify"
+	"github.com/blocklessnetwork/orchestration-chain/x/market"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	"github.com/stretchr/testify/require"
-	keepertest "github.com/txlabs/blockless-chain/testutil/keeper"
-	"github.com/txlabs/blockless-chain/testutil/nullify"
-	"github.com/txlabs/blockless-chain/x/market"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 func TestGenesis(t *testing.T) {

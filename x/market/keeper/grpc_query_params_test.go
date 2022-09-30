@@ -3,10 +3,10 @@ package keeper_test
 import (
 	"testing"
 
+	testkeeper "github.com/blocklessnetwork/orchestration-chain/testutil/keeper"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
-	testkeeper "github.com/txlabs/blockless-chain/testutil/keeper"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 func TestParamsQuery(t *testing.T) {

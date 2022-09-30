@@ -3,10 +3,10 @@ package cli
 import (
 	"context"
 
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 func CmdQueryParams() *cobra.Command {

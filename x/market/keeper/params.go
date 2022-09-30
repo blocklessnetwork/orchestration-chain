@@ -1,8 +1,8 @@
 package keeper
 
 import (
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 // GetParams get all parameters as types.Params

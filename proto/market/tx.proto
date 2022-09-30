@@ -3,7 +3,7 @@ package txlabs.blocklesschain.market;
 
 // this line is used by starport scaffolding # proto/tx/import
 
-option go_package = "github.com/txlabs/blockless-chain/x/market/types";
+option go_package = "github.com/blocklessnetwork/orchestration-chain/x/market/types";
 
 // Msg defines the Msg service.
 service Msg {

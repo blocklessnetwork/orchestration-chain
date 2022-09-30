@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/txlabs/blockless-chain/x/market/types"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 )
 
 type msgServer struct {

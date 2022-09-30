@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
+	keepertest "github.com/blocklessnetwork/orchestration-chain/testutil/keeper"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/keeper"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	keepertest "github.com/txlabs/blockless-chain/testutil/keeper"
-	"github.com/txlabs/blockless-chain/x/market/keeper"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {

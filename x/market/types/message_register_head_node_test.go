@@ -3,9 +3,9 @@ package types
 import (
 	"testing"
 
+	"github.com/blocklessnetwork/orchestration-chain/testutil/sample"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
-	"github.com/txlabs/blockless-chain/testutil/sample"
 )
 
 func TestMsgRegisterHeadNode_ValidateBasic(t *testing.T) {

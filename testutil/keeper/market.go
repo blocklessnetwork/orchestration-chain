@@ -3,6 +3,8 @@ package keeper
 import (
 	"testing"
 
+	"github.com/blocklessnetwork/orchestration-chain/x/market/keeper"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/store"
@@ -13,8 +15,6 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmdb "github.com/tendermint/tm-db"
-	"github.com/txlabs/blockless-chain/x/market/keeper"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 func MarketKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {

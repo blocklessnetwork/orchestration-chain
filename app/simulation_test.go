@@ -5,6 +5,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/blocklessnetwork/orchestration-chain/app"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/simapp"
@@ -17,7 +18,6 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtypes "github.com/tendermint/tendermint/types"
-	"github.com/txlabs/blockless-chain/app"
 )
 
 func init() {

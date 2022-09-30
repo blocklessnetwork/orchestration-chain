@@ -11,52 +11,52 @@ import "market/claimed_order.proto";
 import "market/node_registration.proto";
 // this line is used by starport scaffolding # 1
 
-option go_package = "github.com/txlabs/blockless-chain/x/market/types";
+option go_package = "github.com/blocklessnetwork/orchestration-chain/x/market/types";
 
 // Query defines the gRPC querier service.
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/txlabs/blockless-chain/market/params";
+    option (google.api.http).get = "/blocklessnetwork/orchestration-chain/market/params";
   }
   // Queries a Order by index.
 	rpc Order(QueryGetOrderRequest) returns (QueryGetOrderResponse) {
-		option (google.api.http).get = "/txlabs/blockless-chain/market/order/{index}";
+		option (google.api.http).get = "/blocklessnetwork/orchestration-chain/market/order/{index}";
 	}
 
 	// Queries a list of Order items.
 	rpc OrderAll(QueryAllOrderRequest) returns (QueryAllOrderResponse) {
-		option (google.api.http).get = "/txlabs/blockless-chain/market/order";
+		option (google.api.http).get = "/blocklessnetwork/orchestration-chain/market/order";
 	}
 
 // Queries a CompletedOrder by index.
 	rpc CompletedOrder(QueryGetCompletedOrderRequest) returns (QueryGetCompletedOrderResponse) {
-		option (google.api.http).get = "/txlabs/blockless-chain/market/completed_order/{index}";
+		option (google.api.http).get = "/blocklessnetwork/orchestration-chain/market/completed_order/{index}";
 	}
 
 	// Queries a list of CompletedOrder items.
 	rpc CompletedOrderAll(QueryAllCompletedOrderRequest) returns (QueryAllCompletedOrderResponse) {
-		option (google.api.http).get = "/txlabs/blockless-chain/market/completed_order";
+		option (google.api.http).get = "/blocklessnetwork/orchestration-chain/market/completed_order";
 	}
 
 // Queries a ClaimedOrder by index.
 	rpc ClaimedOrder(QueryGetClaimedOrderRequest) returns (QueryGetClaimedOrderResponse) {
-		option (google.api.http).get = "/txlabs/blockless-chain/market/claimed_order/{index}";
+		option (google.api.http).get = "/blocklessnetwork/orchestration-chain/market/claimed_order/{index}";
 	}
 
 	// Queries a list of ClaimedOrder items.
 	rpc ClaimedOrderAll(QueryAllClaimedOrderRequest) returns (QueryAllClaimedOrderResponse) {
-		option (google.api.http).get = "/txlabs/blockless-chain/market/claimed_order";
+		option (google.api.http).get = "/blocklessnetwork/orchestration-chain/market/claimed_order";
 	}
 
 // Queries a NodeRegistration by index.
 	rpc NodeRegistration(QueryGetNodeRegistrationRequest) returns (QueryGetNodeRegistrationResponse) {
-		option (google.api.http).get = "/txlabs/blockless-chain/market/node_registration/{index}";
+		option (google.api.http).get = "/blocklessnetwork/orchestration-chain/market/node_registration/{index}";
 	}
 
 	// Queries a list of NodeRegistration items.
 	rpc NodeRegistrationAll(QueryAllNodeRegistrationRequest) returns (QueryAllNodeRegistrationResponse) {
-		option (google.api.http).get = "/txlabs/blockless-chain/market/node_registration";
+		option (google.api.http).get = "/blocklessnetwork/orchestration-chain/market/node_registration";
 	}
 
 // this line is used by starport scaffolding # 2

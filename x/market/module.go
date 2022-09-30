@@ -11,14 +11,14 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
+	"github.com/blocklessnetwork/orchestration-chain/x/market/client/cli"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/keeper"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/txlabs/blockless-chain/x/market/client/cli"
-	"github.com/txlabs/blockless-chain/x/market/keeper"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 var (

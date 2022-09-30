@@ -3,11 +3,11 @@ package cli
 import (
 	"strconv"
 
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/spf13/cobra"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 var _ = strconv.Itoa(0)

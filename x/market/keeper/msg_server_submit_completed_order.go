@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/tendermint/tendermint/crypto"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 func (k msgServer) SubmitCompletedOrder(goCtx context.Context, msg *types.MsgSubmitCompletedOrder) (*types.MsgSubmitCompletedOrderResponse, error) {

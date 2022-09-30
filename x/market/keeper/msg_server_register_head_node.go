@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 func (k msgServer) RegisterHeadNode(goCtx context.Context, msg *types.MsgRegisterHeadNode) (*types.MsgRegisterHeadNodeResponse, error) {

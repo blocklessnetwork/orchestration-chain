@@ -98,10 +98,10 @@ import (
 	monitoringpkeeper "github.com/tendermint/spn/x/monitoringp/keeper"
 	monitoringptypes "github.com/tendermint/spn/x/monitoringp/types"
 
-	"github.com/txlabs/blockless-chain/docs"
-	marketmodule "github.com/txlabs/blockless-chain/x/market"
-	marketmodulekeeper "github.com/txlabs/blockless-chain/x/market/keeper"
-	marketmoduletypes "github.com/txlabs/blockless-chain/x/market/types"
+	"github.com/blocklessnetwork/orchestration-chain/docs"
+	marketmodule "github.com/blocklessnetwork/orchestration-chain/x/market"
+	marketmodulekeeper "github.com/blocklessnetwork/orchestration-chain/x/market/keeper"
+	marketmoduletypes "github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 

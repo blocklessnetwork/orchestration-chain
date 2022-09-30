@@ -3,10 +3,10 @@ package market
 import (
 	"fmt"
 
+	"github.com/blocklessnetwork/orchestration-chain/x/market/keeper"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/txlabs/blockless-chain/x/market/keeper"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 // NewHandler ...

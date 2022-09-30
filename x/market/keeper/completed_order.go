@@ -1,9 +1,9 @@
 package keeper
 
 import (
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 // SetCompletedOrder set a specific completedOrder in the store from its index

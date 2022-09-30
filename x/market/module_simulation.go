@@ -3,15 +3,15 @@ package market
 import (
 	"math/rand"
 
+	"github.com/blocklessnetwork/orchestration-chain/testutil/sample"
+	marketsimulation "github.com/blocklessnetwork/orchestration-chain/x/market/simulation"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"github.com/txlabs/blockless-chain/testutil/sample"
-	marketsimulation "github.com/txlabs/blockless-chain/x/market/simulation"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 // avoid unused import issue

@@ -1,9 +1,9 @@
 package market
 
 import (
+	"github.com/blocklessnetwork/orchestration-chain/x/market/keeper"
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/txlabs/blockless-chain/x/market/keeper"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 // InitGenesis initializes the capability module's state from a provided genesis

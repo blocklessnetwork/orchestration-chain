@@ -1,0 +1,13 @@
+=============== Aug 19, 2022 (CDT) ===============
+21:55:52.782741 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:55:52.828295 db@open opening
+21:55:52.829681 version@stat F·[] S·0B[] Sc·[]
+=============== Aug 19, 2022 (CDT) ===============
+21:55:52.927160 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:55:52.927687 version@stat F·[] S·0B[] Sc·[]
+21:55:52.927712 db@open opening
+21:55:52.927842 journal@recovery F·1
+21:55:52.929018 journal@recovery recovering @1
+21:55:52.929688 version@stat F·[] S·0B[] Sc·[]
+21:55:52.985940 db@janitor F·2 G·0
+21:55:52.985983 db@open done T·58.257709ms

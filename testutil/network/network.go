@@ -18,7 +18,7 @@ import (
 	tmrand "github.com/tendermint/tendermint/libs/rand"
 	tmdb "github.com/tendermint/tm-db"
 
-	"github.com/txlabs/blockless-chain/app"
+	"github.com/blocklessnetwork/orchestration-chain/app"
 )
 
 type (

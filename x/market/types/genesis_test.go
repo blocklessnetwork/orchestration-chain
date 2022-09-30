@@ -3,8 +3,8 @@ package types_test
 import (
 	"testing"
 
+	"github.com/blocklessnetwork/orchestration-chain/x/market/types"
 	"github.com/stretchr/testify/require"
-	"github.com/txlabs/blockless-chain/x/market/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {

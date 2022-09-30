@@ -849,23 +849,23 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"txlabs", "blockless-chain", "market", "params"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"blocklessnetwork", "orchestration-chain", "market", "params"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_Order_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"txlabs", "blockless-chain", "market", "order", "index"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Order_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"blocklessnetwork", "orchestration-chain", "market", "order", "index"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_OrderAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"txlabs", "blockless-chain", "market", "order"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_OrderAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"blocklessnetwork", "orchestration-chain", "market", "order"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_CompletedOrder_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"txlabs", "blockless-chain", "market", "completed_order", "index"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_CompletedOrder_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"blocklessnetwork", "orchestration-chain", "market", "completed_order", "index"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_CompletedOrderAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"txlabs", "blockless-chain", "market", "completed_order"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_CompletedOrderAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"blocklessnetwork", "orchestration-chain", "market", "completed_order"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_ClaimedOrder_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"txlabs", "blockless-chain", "market", "claimed_order", "index"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_ClaimedOrder_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"blocklessnetwork", "orchestration-chain", "market", "claimed_order", "index"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_ClaimedOrderAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"txlabs", "blockless-chain", "market", "claimed_order"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_ClaimedOrderAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"blocklessnetwork", "orchestration-chain", "market", "claimed_order"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_NodeRegistration_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"txlabs", "blockless-chain", "market", "node_registration", "index"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_NodeRegistration_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"blocklessnetwork", "orchestration-chain", "market", "node_registration", "index"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_NodeRegistrationAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"txlabs", "blockless-chain", "market", "node_registration"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_NodeRegistrationAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"blocklessnetwork", "orchestration-chain", "market", "node_registration"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
