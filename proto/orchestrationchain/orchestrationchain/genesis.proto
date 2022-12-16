@@ -1,0 +1,14 @@
+syntax = "proto3";
+package blocklessnetwork.orchestrationchain.orchestrationchain;
+
+import "gogoproto/gogo.proto";
+import "orchestrationchain/orchestrationchain/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/blocklessnetwork/orchestration-chain/x/orchestrationchain/types";
+
+// GenesisState defines the orchestrationchain module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}
