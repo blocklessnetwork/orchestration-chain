@@ -1,12 +1,12 @@
 version: 1
 accounts:
   - name: alice
-    coins: ["20000token", "200000000stake"]
+    coins: ["200000000ubls"]
   - name: bob
-    coins: ["10000token", "100000000stake"]
+    coins: ["100000000ubls"]
 validators:
   - name: alice
-    bonded: "100000000stake"
+    bonded: "100000000ubls"
 client:
   openapi:
     path: "docs/static/openapi.yml"
@@ -16,4 +16,27 @@ client:
     path: "vue/src/store"
 faucet:
   name: bob
-  coins: ["5token", "100000stake"]
+  coins: ["100000ubls"]
+genesis:
+  chain_id: "bls-edgenet-1"
+  app_state:
+    bank:
+      denom_metadata:
+        - description: Blockless Network Token
+          name: BLS
+          base: ubls
+          symbol: bls
+          display: bls
+          denom_units:
+            - denom: ubls
+              exponent: 0
+            - denom: bls
+              exponent: 6
+    staking:
+      params:
+        bond_denom: "ubls"
+    mint:
+      params:
+        mint_denom: "ubls"
+build:
+  binary: blsd
