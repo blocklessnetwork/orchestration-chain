@@ -67,15 +67,15 @@ function install {
 	FTYPE=""
 	case "${OS}_${ARCH}" in
 	"darwin_amd64")
-		URL="https://github.com/blocklessnetwork/orchestration-chain/releases/download/latest/orchestration-chain_latest_darwin_amd64.tar.gz"
+		URL="https://github.com/blocklessnetwork/orchestration-chain/releases/download/latest/orchestration-chain._latest_darwin_amd64.tar.gz"
 		FTYPE=".tar.gz"
 		;;
 	"darwin_arm64")
-		URL="https://github.com/blocklessnetwork/orchestration-chain/releases/download/latest/orchestration-chain_latest_darwin_arm64.tar.gz"
+		URL="https://github.com/blocklessnetwork/orchestration-chain/releases/download/latest/orchestration-chain._latest_darwin_arm64.tar.gz"
 		FTYPE=".tar.gz"
 		;;
 	"linux_amd64")
-		URL="https://github.com/blocklessnetwork/orchestration-chain/releases/download/latest/orchestration-chain_latest_linux_amd64.tar.gz"
+		URL="https://github.com/blocklessnetwork/orchestration-chain/releases/download/latest/orchestration-chain._latest_linux_amd64.tar.gz"
 		FTYPE=".tar.gz"
 		;;
 	*) fail "No asset for platform ${OS}-${ARCH}";;
