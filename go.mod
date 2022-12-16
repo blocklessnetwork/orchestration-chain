@@ -1,4 +1,4 @@
-module orchestration-chain
+module github.com/blocklessnetwork/orchestration-chain
 
 go 1.18
 
